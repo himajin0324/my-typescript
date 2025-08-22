@@ -1,0 +1,210 @@
+/*#root {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+}
+
+.logo {
+  height: 6em;
+  padding: 1.5em;
+  will-change: filter;
+  transition: filter 300ms;
+}
+.logo:hover {
+  filter: drop-shadow(0 0 2em #646cffaa);
+}
+.logo.react:hover {
+  filter: drop-shadow(0 0 2em #61dafbaa);
+}
+
+@keyframes logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  a:nth-of-type(2) .logo {
+    animation: logo-spin infinite 20s linear;
+  }
+}
+
+.card {
+  padding: 2em;
+}
+
+.read-the-docs {
+  color: #888;
+}
+*/
+:root{
+  --bg: #0b1020;
+  --bg2: #111a33;
+  --card: rgba(255,255,255,0.07);
+  --text: #e9eefb;
+  --muted: #b8c2e0;
+  --primary: #7aa2ff;
+  --primary-strong: #5c87ff;
+  --accent: #7affd8;
+  --shadow: 0 10px 30px rgba(0,0,0,.35);
+  --radius: 16px;
+  --ring: 0 0 0 3px rgba(122,162,255,.35);
+}
+
+@media (prefers-color-scheme: light){
+  :root{
+    --bg: #eef3ff;
+    --bg2: #dfe7ff;
+    --card: rgba(255,255,255,0.8);
+    --text: #111827;
+    --muted: #475569;
+    --primary: #3b82f6;
+    --primary-strong: #2563eb;
+    --accent: #14b8a6;
+    --shadow: 0 10px 20px rgba(0,0,0,.15);
+    --ring: 0 0 0 3px rgba(59,130,246,.25);
+  }
+}
+
+* { box-sizing: border-box; }
+html, body, #root { height: 100%; }
+body {
+  margin: 0;
+  color: var(--text);
+  font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Noto Sans, "Hiragino Kaku Gothic ProN", Meiryo, sans-serif;
+  background:
+    radial-gradient(1200px 600px at 80% -20%, var(--bg2), transparent 60%),
+    radial-gradient(1000px 500px at -10% 110%, var(--accent), transparent 40%),
+    linear-gradient(160deg, var(--bg), var(--bg2));
+}
+
+/* ====== Layout ====== */
+.page{
+  min-height: 100%;
+  display: grid;
+  place-items: center;
+  padding: 48px 20px;
+}
+
+.card{
+  width: min(560px, 92vw);
+  background: var(--card);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255,255,255,.12);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 28px 24px;
+  animation: pop .35s ease-out;
+}
+
+@keyframes pop{
+  from{ transform: translateY(6px) scale(.98); opacity: 0; }
+  to{ transform: translateY(0) scale(1); opacity: 1; }
+}
+
+.header{
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 18px;
+}
+
+.title{
+  font-size: clamp(20px, 3.2vw, 28px);
+  letter-spacing: .4px;
+  margin: 0;
+}
+
+.badge{
+  font-size: 12px;
+  padding: 4px 8px;
+  border-radius: 999px;
+  border: 1px dashed rgba(255,255,255,.25);
+  color: var(--muted);
+}
+
+.display{
+  font-variant-numeric: tabular-nums;
+  font-weight: 800;
+  text-align: center;
+  font-size: clamp(48px, 9vw, 92px);
+  line-height: 1.1;
+  padding: 18px 0 10px;
+  text-shadow: 0 2px 0 rgba(0,0,0,.18);
+}
+
+/* ====== Controls / Buttons ====== */
+.controls{
+  display: grid;
+  grid-template-columns: 1fr 1fr auto;
+  gap: 12px;
+  margin-top: 8px;
+}
+
+.btn{
+  --bg-btn: rgba(255,255,255,.06);
+  --bg-btn-hover: rgba(255,255,255,.12);
+  --bg-btn-active: rgba(255,255,255,.18);
+  appearance: none;
+  border: 1px solid rgba(255,255,255,.14);
+  background: var(--bg-btn);
+  color: var(--text);
+  padding: 14px 16px;
+  border-radius: 14px;
+  font-size: clamp(16px, 2.5vw, 18px);
+  font-weight: 700;
+  letter-spacing: .2px;
+  cursor: pointer;
+  transition: transform .06s ease, background .15s ease, border-color .15s ease, box-shadow .15s ease;
+  will-change: transform;
+}
+
+.btn:hover{ background: var(--bg-btn-hover); }
+.btn:active{ background: var(--bg-btn-active); transform: translateY(1px) scale(.995); }
+.btn:focus-visible{ outline: none; box-shadow: var(--ring); }
+
+.btn.primary{
+  background: linear-gradient(180deg, var(--primary), var(--primary-strong));
+  border: none;
+  color: white;
+}
+.btn.primary:hover{
+  filter: brightness(1.03);
+}
+.btn.primary:active{
+  filter: brightness(.97);
+}
+
+.btn.ghost{
+  border: 1px solid rgba(255,255,255,.22);
+  background: transparent;
+}
+
+.btn.subtle{
+  font-weight: 600;
+  background: rgba(255,255,255,.05);
+}
+
+/* ====== Footer Hint ====== */
+.hint{
+  margin-top: 14px;
+  color: var(--muted);
+  font-size: 12px;
+  text-align: center;
+  user-select: none;
+}
+kbd{
+  padding: 2px 6px;
+  border-radius: 6px;
+  border: 1px solid rgba(255,255,255,.25);
+  background: rgba(0,0,0,.15);
+}
+
+/* ====== Motion preference ====== */
+@media (prefers-reduced-motion: reduce){
+  *{ animation: none !important; transition: none !important; }
+}
