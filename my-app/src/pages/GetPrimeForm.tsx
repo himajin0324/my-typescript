@@ -1,31 +1,36 @@
 import classes from "./css/GetPrimeForm.module.css";
 import { useRef, useState } from "react";
 import { isPrime, fact, get_Prime_Place } from "./scripts/MathManager.ts";
-
+import { label, LoadNum, SaveNum } from "./scripts/DataManager.ts";
 
 export default function GetPrimeForm(){
     const inputRef = useRef<HTMLInputElement>(null);
     const [result, setResult] = useState<React.JSX.Element | null>(null);
-
     const handleClick = () => {
         //入力値がnull
         if (!inputRef.current)return;
         const inputNum = Number(inputRef.current.value);
         //入力値がNaN（数値以外）
         if (isNaN(inputNum))return;
-        //入力値が素数
-        if (isPrime(inputNum) == true){
-            setResult(<div>
-                {inputNum}は素数<br></br>
-                {get_Prime_Place(inputNum)}番目の素数です
-            </div>);
+        //判定は1回のみ
+        if (LoadNum(label.pre_number) != inputNum)
+        {
+            //入力値が素数
+            if (isPrime(inputNum) == true){
+                setResult(<div>
+                    {inputNum}は素数<br></br>
+                    {get_Prime_Place(inputNum)}番目の素数です
+                </div>);
+            }
+            else {
+                setResult(<div>
+                    {inputNum}は素数でない<br></br>
+                    {fact(inputNum)}
+                </div>);
+            }
+            SaveNum(label.pre_number, inputNum);
         }
-        else {
-            setResult(<div>
-                {inputNum}は素数でない<br></br>
-                {fact(inputNum)}
-            </div>);
-        }
+
     }
     return(<div className={classes.container}>
         <input type="text" ref={inputRef} className={classes.inputBox}/>
