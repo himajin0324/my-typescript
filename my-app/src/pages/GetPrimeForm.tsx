@@ -10,10 +10,12 @@ export default function GetPrimeForm(){
         //入力値がnull or NaN（数値以外）
         if (!inputRef.current)return;
         const inputNum = Number(inputRef.current.value);
-        //入力値がNaN（数値以外）
-        if (isNaN(inputNum)){
+        //入力値がNaN（数値以外）-(10^9)~10~9（安全値）
+        if (isNaN(inputNum) || 
+            -(10**9) >= inputNum || 
+            inputNum >= 10**9){
             setResult(<div>
-                値を入力してください。(-_-メ)
+                正常値を入力してください。(-_-メ)
             </div>);
             return;
         }
