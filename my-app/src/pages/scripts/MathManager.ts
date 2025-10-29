@@ -28,11 +28,17 @@ export const get_Prime_Place = (n:number) => {
     }
     return count;
 }
-
+//素因数分解:stringで結果出力
 export const fact = (n:number) => {
     let i = 2;
     const array:number[] = [];
     let str = "";
+    //負の値が渡された→-1で割る
+    if (n < 0)
+    {
+        array.push(-1);
+        n /= -1;
+    }
     while(i <= n){
         //割り切れた！=iはnの因数
         if (n % i == 0)
