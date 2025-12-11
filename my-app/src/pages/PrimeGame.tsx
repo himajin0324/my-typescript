@@ -18,50 +18,7 @@ export default function PrimeGame(){
         setInput((prev) => [...prev, n])
         setInputString((prev) => (prev === "" ? `${n}` : `${prev}×${n}`));
     }
-    // const onDiv = () => {
-    //     if (input.length <= 1) {
-    //         setMessage("素数を選んでください");
-    //         return;
-    //     }
-    //     let result = Target;
-    //     let usedPrimes: number[] = [];
-    //     let failed = false;
-
-    //     // input[1]以降を順に割る
-    //     for (let i = 1; i < input.length; i++) {
-    //         const prime = input[i];
-    //         if (result % prime === 0) {
-    //             result = result / prime;
-    //             usedPrimes.push(prime);
-    //             // 1になったらクリア
-    //             if (result === 1) {
-    //                 break;
-    //             }
-    //         } else {
-    //             failed = true;
-    //             break;
-    //         }
-    //     }
-
-    //     setTarget(result);
-
-    //     if (result === 1) {
-    //         setMessage("クリア！");
-    //         setTarget(makeTarget(primes));
-    //         setInput([1]);
-    //         setInputString("");
-    //     } else if (failed) {
-    //         // 割れなかった場合は使った素数だけ表示
-    //         setInput([1]);
-    //         setInputString(usedPrimes.length > 0 ? usedPrimes.join("×") : "");
-    //         setMessage("割れませんでした！");
-    //     } else {
-    //         // 全て割れたが1になっていない場合（通常はありえない）
-    //         setInput([1]);
-    //         setInputString("");
-    //         setMessage("");
-    //     }
-    // }
+    //自動で割る処理
     const autoDiv = () => {
         //入力値が無い場合
         if (input.length <= 1) {
@@ -71,7 +28,7 @@ export default function PrimeGame(){
         
         let result = Target;
         let i = 1;
-
+        //割り算
         function step() {
             if (i >= input.length) {
                 //全て割り終わった
@@ -87,10 +44,10 @@ export default function PrimeGame(){
             const prime = input[i];
             if (result % prime === 0) {
                 result = result / prime;
-                // inputから使った素数を消す
+                //inputから使った素数を消す
                 const newInput = [1, ...input.slice(i + 1)];
                 setInput(newInput);
-                // inputStringも更新（未使用の素数のみ表示）
+                //inputStringも更新（未使用の素数のみ表示）
                 const inputPrimes = newInput.slice(1);
                 setInputString(inputPrimes.length > 0 ? inputPrimes.join("×") : "");
                 setTarget(result);

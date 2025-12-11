@@ -1,0 +1,43 @@
+/*GitHub Copilotにて生成*/
+.container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    gap: 40px;
+}
+
+.title {
+    font-size: 4.5em;
+    font-weight: bold;
+    color: #ffffff;
+    text-align: center;
+    text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.3);
+    margin: 0;
+    letter-spacing: 2px;
+}
+
+.button {
+    padding: 20px 50px;
+    font-size: 1.8em;
+    font-weight: bold;
+    color: #ffffff;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border: 3px solid #ffffff;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.button:hover {
+    transform: scale(1.1);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+    background: linear-gradient(135deg, #764ba2 0%, #667eea 100%);
+}
+
+.button:active {
+    transform: scale(0.98);
+}

@@ -4,6 +4,7 @@ import Profile from "./pages/Profile";
 import GetPrimeForm from "./pages/GetPrimeForm";
 import PrimeGame from "./pages/PrimeGame";
 import FooterMenu from "./pages/FooterMenu";
+import PrimeGameTitle from "./pages/PrimeGameTitle";
 
 export default function App(){
     return(<div>
@@ -13,7 +14,8 @@ export default function App(){
             <Route path="/Profile" element={<Profile />}/>
             <Route path="/TodayPrime" element={<TodayPrime />} />
             <Route path="/GetPrimeForm" element={<GetPrimeForm/>}/>
-            <Route path="/PrimeGame" element={<PrimeGame/>} />
+            <Route path="/PrimeGameTitle" element={<PrimeGameTitle/>} />
+            <Route path="/PrimeGame" element={<PrimeGame/>}/>
         </Routes>
     </div>);
 }
