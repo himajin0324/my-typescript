@@ -8,13 +8,13 @@ position: https://saruwakakun.com/html-css/basic/relative-absolute-fixed
 */
 .container{
     position: relative;
-    background: linear-gradient(135deg, #e0e7ff 0%, #f0fdfa 100%);
+    background: linear-gradient(180deg, #0f1724 0%, #0b1220 100%);
     width: 100%;
     max-width: 480px;
     min-height: 340px;
     margin: 40px auto;
     border-radius: 18px;
-    box-shadow: 0 4px 24px rgba(0,0,0,0.12);
+    box-shadow: 0 8px 30px rgba(2,6,23,0.7);
     text-align: center;
     padding: 32px 24px;
     display: flex;
@@ -22,51 +22,52 @@ position: https://saruwakakun.com/html-css/basic/relative-absolute-fixed
     align-items: center;
 }
 .button {
-    font-family: "DotGothic16", sans-serif;    
-    text-align: center; 
-    background: linear-gradient(90deg, #6366f1 60%, #38bdf8 100%);
-    color: #fff;
+    font-family: "DotGothic16", sans-serif;
+    text-align: center;
+    background: linear-gradient(90deg, #1f2937 0%, #374151 100%);
+    color: #ffffff;
     border-radius: 24px;
-    box-shadow: 0 2px 8px rgba(99,102,241,0.15);
+    box-shadow: 0 6px 18px rgba(2,6,23,0.6);
     height: 56px;
     width: 160px;
     font-size: 1.3rem;
     font-weight: bold;
     margin-top: 12px;
-    border: none;
+    border: 1px solid rgba(255,255,255,0.04);
     cursor: pointer;
     transition: background 0.2s, transform 0.1s;
 }
 .button:hover {
-    background: linear-gradient(90deg, #38bdf8 60%, #6366f1 100%);
-    transform: scale(1.05);
+    background: linear-gradient(90deg, #475569 0%, #64748b 100%);
+    transform: scale(1.03);
 }
 .inputBox{
     font-size: 2rem;
-    font-family: "DotGothic16", sans-serif;  
+    font-family: "DotGothic16", sans-serif;
     text-align: center;
-    background-color: #fff;
-    border: 4px solid #6366f1;
+    background-color: #0f1724;
+    color: #f8fafc;
+    border: 2px solid #475569;
     border-radius: 12px;
     height: 60px;
     width: 240px;
     margin-bottom: 24px;
     margin-top: 12px;
-    box-shadow: 0 2px 8px rgba(99,102,241,0.10);
+    box-shadow: 0 6px 18px rgba(2,6,23,0.45) inset;
 }
 .concBox{
     position: relative;
     margin-top: 32px;
     font-family: "DotGothic16", sans-serif;
     font-size: 2.2rem;
-    background: #fff;
+    background: linear-gradient(180deg, #111827 0%, #0f1724 100%);
     border-radius: 12px;
-    box-shadow: 0 2px 8px rgba(99,102,241,0.10);
+    box-shadow: 0 6px 18px rgba(2,6,23,0.5);
     padding: 24px 12px;
     min-height: 80px;
     width: 100%;
     max-width: 340px;
-    color: #222;
+    color: #e6eef6;
     display: flex;
     align-items: center;
     justify-content: center;

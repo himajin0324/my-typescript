@@ -4,14 +4,20 @@ import { makeTarget } from "./scripts/MathManager.ts";
 import classes from "./css/PrimeGame.module.css";
 
 export default function PrimeGame(){
-    //初期化対策(Reactの機能)
+    //値の保持に通常の変数を用いない：初期化対策(Reactの機能)
     //画面を更新してくれる
     //通常の書き方だと値は変わっても画面は更新されない
+
+    //入力値を格納する配列
     //inputの値で割るため，空リスト防止で[1]を初期値
     const [input, setInput] = useState<number[]>([1]);
+    //画面表示用の入力素数文字列
     const [inputString, setInputString] = useState("");
-    const [message, setMessage] = useState(""); // メッセージ用
+    //メッセージ表示用
+    const [message, setMessage] = useState("");
+    //使える素数
     const primes = [2,3,5,7,11,13]
+    //割るターゲット
     const [Target, setTarget] = useState<number>(makeTarget(primes));
     //画面に入力素数を表示
     const onPrime = (n:number) => {
