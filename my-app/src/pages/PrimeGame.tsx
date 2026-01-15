@@ -19,6 +19,8 @@ export default function PrimeGame(){
     const primes = [2,3,5,7,11,13]
     //割るターゲット
     const [Target, setTarget] = useState<number>(makeTarget(primes));
+    //スコア
+    const [Score, setScore] = useState<number>(0);
     //画面に入力素数を表示
     const onPrime = (n:number) => {
         setInput((prev) => [...prev, n])
@@ -27,15 +29,16 @@ export default function PrimeGame(){
     //自動で割る処理
     const autoDiv = () => {
         //入力値が無い場合
-        if (input.length <= 1) {
+        if (input.length <= 1 && Target !== 1) {
             setMessage("素数を選んでください");
             return;
         }
-        
         let result = Target;
         let i = 1;
         //割り算
         function step() {
+            const prime = input[i];
+            //入力値を使い切った
             if (i >= input.length) {
                 //全て割り終わった
                 setInput([1]);
@@ -44,11 +47,12 @@ export default function PrimeGame(){
                 if (result === 1) {
                     setMessage("クリア！");
                     setTarget(makeTarget(primes));
+                    setScore(prev => prev + 1);
                 }
                 return;
             }
-            const prime = input[i];
-            if (result % prime === 0) {
+            //入力値で割り切れた
+            else if (result % prime === 0) {
                 result = result / prime;
                 //inputから使った素数を消す
                 const newInput = [1, ...input.slice(i + 1)];
@@ -59,15 +63,11 @@ export default function PrimeGame(){
                 setTarget(result);
                 setMessage("");
                 i++;
-                if (result === 1) {
-                    setMessage("クリア！");
-                    setTarget(makeTarget(primes));
-                    setInput([1]);
-                    setInputString("");
-                    return;
-                }
+                //500ms後にstepを実行⇒素数を1つずつ割るモーション
                 setTimeout(step, 500);
-            } else {
+            }
+            else
+            {
                 setInput([1]);
                 setInputString("");
                 setMessage("割れませんでした！");
@@ -77,6 +77,7 @@ export default function PrimeGame(){
     }
     return (
         <div className={classes.center}>
+            <div className={classes.score}>Score: {Score}</div>
             <div className={classes.panel}>
                 <h2 className={classes.title}>素因数分解ゲーム</h2>
                 <div className={classes.target}>Target: <span>{Target}</span></div>
