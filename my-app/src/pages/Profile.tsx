@@ -1,11 +1,17 @@
 import classes from "./css/Profile.module.css";
-import profileImg from "./img/profile.jpg";
+import profileImg1 from "./img/profile1.jpg";
+import profileImg2 from "./img/profile2.jpeg";
+import profileImg3 from "./img/profile3.jpg";
 import { Accordion } from "./scripts/Accordion.tsx";
 
 export default function Profile(){
     return(<div className={classes.body}>
         <div className={classes.profileContainer}>
-            <img className={classes.profImg} src={profileImg} alt="profImg" />
+            <div className={classes.profImgContainer}>
+                <img className={classes.profImg} src={profileImg1} alt="profImg1" />
+                <img className={classes.profImg} src={profileImg2} alt="profImg2" />
+                <img className={classes.profImg} src={profileImg3} alt="profImg3" />
+            </div>
             <div className={classes.profText}>
                 <div className={classes.textContainer}>
                     MyProfile:<br/>

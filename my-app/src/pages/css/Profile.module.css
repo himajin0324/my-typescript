@@ -31,10 +31,17 @@ body {
     line-height: 1.6;
 }
 
+.profImgContainer {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 20px;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+}
+
 .profImg {
     object-fit: cover;
     border-radius: 5%;
-    margin-bottom: 20px;
     height: 200px;
     width: 200px;
 }
