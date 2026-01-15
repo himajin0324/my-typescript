@@ -79,9 +79,9 @@ export default function PrimeGame(){
     //入力した素数を消す
     return (
         <div className={classes.center}>
-            <div className={classes.score}>Score: {Score}</div>
             <div className={classes.panel}>
-                <video autoPlay loop muted className={classes.bgVideo}>
+                <div className={classes.score}>Score: {Score}</div>
+                <video autoPlay loop muted playsInline className={classes.bgVideo} controlsList="nofullscreen">
                     <source src={videoBack} type="video/mp4" />
                 </video>
                 <h2 className={classes.title}>素因数分解ゲーム</h2>

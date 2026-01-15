@@ -5,18 +5,20 @@
     align-items: center;
     min-height: 100vh;
     background: linear-gradient(135deg, #e6f0ff 0%, #f8fbff 100%);
+    z-index: 0;
 }
 .score {
     position: absolute;
-    top: 20px;
+    top: 0px;
     right: 20px;
-    font-size: 1.5rem;
+    font-size: 1.2rem;
     font-weight: bold;
     color: #1e40af;
     background: rgba(255, 255, 255, 0.9);
-    padding: 12px 20px;
-    border-radius: 12px;
-    box-shadow: 0 4px 12px rgba(14,42,80,0.1);
+    padding: 8px 16px;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(14,42,80,0.1);
+    z-index: 10;
 }
 .panel {
     background: #ffffff;
@@ -27,6 +29,7 @@
     min-width: 340px;
     position: relative;
     overflow: hidden;
+    z-index: 1;
 }
 .bgVideo {
     position: absolute;
@@ -37,6 +40,7 @@
     object-fit: cover;
     z-index: 0;
     border-radius: 20px;
+    pointer-events: none;
 }
 .title {
     font-size: 2rem;
@@ -198,6 +202,35 @@
 }
 
 @media (max-width: 420px) {
-    .buttonArea { grid-template-columns: repeat(3, 1fr); max-width: 260px; }
-    .primeButton { max-width: 64px; font-size: 1.1rem; }
+    .panel {
+        min-width: 90vw;
+        padding: 20px 16px;
+    }
+    .buttonArea {
+        grid-template-columns: repeat(4, 1fr);
+        gap: 6px;
+        max-width: 100%;
+        margin: 0 auto 8px;
+    }
+    .primeButton {
+        max-width: 100%;
+        font-size: 0.9rem;
+        margin: 2px 0;
+    }
+    .clearButton {
+        max-width: 100%;
+        font-size: 0.8rem;
+        margin: 2px 0;
+    }
+    .divButton {
+        max-width: 100%;
+        font-size: 0.8rem;
+        margin: 2px 0;
+    }
+    .bgVideo {
+        display: none;
+    }
+    .panel {
+        background: linear-gradient(135deg, #e6f0ff 0%, #f8fbff 100%);
+    }
 }
