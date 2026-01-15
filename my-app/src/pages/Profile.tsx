@@ -4,11 +4,11 @@ import { Accordion } from "./scripts/Accordion.tsx";
 
 export default function Profile(){
     return(<div className={classes.body}>
-        <h1>マイプロフィール</h1>
         <div className={classes.profileContainer}>
             <img className={classes.profImg} src={profileImg} alt="profImg" />
             <div className={classes.profText}>
                 <div className={classes.textContainer}>
+                    MyProfile:<br/>
                     ニックネーム：はぎ<br/>
                     生年月日：2005年3月24日生<br/>
                     血液型：O型<br/>

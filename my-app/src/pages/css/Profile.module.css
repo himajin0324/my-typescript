@@ -1,28 +1,74 @@
 body {
     background-color: rgb(201, 201, 201);
+    margin: 0;
+    padding: 0;
 }
 
 .profileContainer {
     background-color: aliceblue;
     border-style: dashed;
     border-color: gray;
-    width: 100%;
-    height: 1000px;
+    width: 90%;
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 20px;
+    box-sizing: border-box;
+    min-height: 600px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
 }
+
 .textContainer {
     position: relative;
-    margin-left: 10px;
+    width: 100%;
+    text-align: left;
 }
+
 .profText {
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-    font-size: large;
+    font-size: 1rem;
+    line-height: 1.6;
 }
 
 .profImg {
     object-fit: cover;
-    position: relative;
     border-radius: 5%;
-    margin-left: 10px;
-    margin-top: 10px;
+    margin-bottom: 20px;
     height: 200px;
+    width: 200px;
+}
+
+@media (max-width: 768px) {
+    .profileContainer {
+        width: 95%;
+        padding: 15px;
+    }
+    
+    .profText {
+        font-size: 0.95rem;
+    }
+    
+    .profImg {
+        height: 160px;
+        width: 160px;
+    }
+}
+
+@media (max-width: 480px) {
+    .profileContainer {
+        width: 95%;
+        padding: 10px;
+        min-height: auto;
+    }
+    
+    .profText {
+        font-size: 0.85rem;
+    }
+    
+    .profImg {
+        height: 120px;
+        width: 120px;
+        margin-bottom: 15px;
+    }
 }
