@@ -2,6 +2,7 @@
 import { useState } from "react";
 import { makeTarget } from "./scripts/MathManager.ts";
 import classes from "./css/PrimeGame.module.css";
+import videoBack from "./img/videoback.mp4";
 
 export default function PrimeGame(){
     //値の保持に通常の変数を用いない：初期化対策(Reactの機能)
@@ -18,7 +19,7 @@ export default function PrimeGame(){
     //使える素数
     const primes = [2,3,5,7,11,13]
     //割るターゲット
-    const [Target, setTarget] = useState<number>(makeTarget(primes));
+    const [Target, setTarget] = useState<number>(makeTarget(primes, 2));
     //スコア
     const [Score, setScore] = useState<number>(0);
     //画面に入力素数を表示
@@ -46,7 +47,7 @@ export default function PrimeGame(){
                 setMessage("");
                 if (result === 1) {
                     setMessage("クリア！");
-                    setTarget(makeTarget(primes));
+                    setTarget(makeTarget(primes, 2));
                     setScore(prev => prev + 1);
                 }
                 return;
@@ -64,7 +65,7 @@ export default function PrimeGame(){
                 setMessage("");
                 i++;
                 //500ms後にstepを実行⇒素数を1つずつ割るモーション
-                setTimeout(step, 500);
+                setTimeout(step, 300);
             }
             else
             {
@@ -75,16 +76,20 @@ export default function PrimeGame(){
         }
         step();
     }
+    //入力した素数を消す
     return (
         <div className={classes.center}>
             <div className={classes.score}>Score: {Score}</div>
             <div className={classes.panel}>
+                <video autoPlay loop muted className={classes.bgVideo}>
+                    <source src={videoBack} type="video/mp4" />
+                </video>
                 <h2 className={classes.title}>素因数分解ゲーム</h2>
                 <div className={classes.target}>Target: <span>{Target}</span></div>
                 <div className={classes.input}>入力: <span>{inputString}</span></div>
                 <div className={classes.message}>{message}</div>
                 <div className={classes.buttonArea}>
-                    {primes.map((p) => (
+                    {primes.slice(0, 3).map((p) => (
                         <button
                             key={p}
                             className={classes.primeButton}
@@ -93,8 +98,20 @@ export default function PrimeGame(){
                             {p}
                         </button>
                     ))}
+                    <button className={classes.clearButton}>消す</button>
                 </div>
-                <button className={classes.divButton} onClick={autoDiv}>割る！</button>
+                <div className={classes.buttonArea}>
+                    {primes.slice(3, 6).map((p) => (
+                        <button
+                            key={p}
+                            className={classes.primeButton}
+                            onClick={() => onPrime(p)}
+                        >
+                            {p}
+                        </button>
+                    ))}
+                    <button className={classes.divButton} onClick={autoDiv}>割る</button>
+                </div>
             </div>
         </div>
     );

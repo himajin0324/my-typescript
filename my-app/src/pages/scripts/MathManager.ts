@@ -13,12 +13,12 @@ export const makePrime = (digit:number) => {
     return n;
 }
 //引数で指定した因数を持つ値を生成
-export const makeTarget = (arrayFactor:number[]) => {
+export const makeTarget = (arrayFactor:number[], range:number) => {
     const facts = [...arrayFactor];//jsでは参照渡しなのでコピー
     let n = 1;
     while (facts.length > 0){
         //せいぜい2個までの素因数
-        n *= Number(facts.shift())**(Math.floor(Math.random() * 3));
+        n *= Number(facts.shift())**(Math.floor(Math.random() * range));
     }
 
     return n;
