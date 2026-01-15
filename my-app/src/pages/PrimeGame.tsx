@@ -24,7 +24,7 @@ export default function PrimeGame(){
     const [Score, setScore] = useState<number>(0);
     //画面に入力素数を表示
     const onPrime = (n:number) => {
-        setInput((prev) => [...prev, n])
+        setInput((prev) => [...prev, n]);
         setInputString((prev) => (prev === "" ? `${n}` : `${prev}×${n}`));
     }
     //自動で割る処理
@@ -58,7 +58,7 @@ export default function PrimeGame(){
                 //inputから使った素数を消す
                 const newInput = [1, ...input.slice(i + 1)];
                 setInput(newInput);
-                //inputStringも更新（未使用の素数のみ表示）
+                //inputStringも更新
                 const inputPrimes = newInput.slice(1);
                 setInputString(inputPrimes.length > 0 ? inputPrimes.join("×") : "");
                 setTarget(result);
@@ -77,6 +77,16 @@ export default function PrimeGame(){
         step();
     }
     //入力した素数を消す
+    const deleteInput = () => {
+        if (input.length > 1)
+        {
+            //後ろから1番目までのコピーを返す
+            const newInput = input.slice(0, -1);
+            setInput(newInput);
+            const inputPrimes = newInput.slice(1);
+            setInputString(inputPrimes.join("×"));            
+        }
+    }
     return (
         <div className={classes.center}>
             <div className={classes.panel}>
@@ -98,7 +108,7 @@ export default function PrimeGame(){
                             {p}
                         </button>
                     ))}
-                    <button className={classes.clearButton}>消す</button>
+                    <button className={classes.clearButton} onClick={deleteInput}>消す</button>
                 </div>
                 <div className={classes.buttonArea}>
                     {primes.slice(3, 6).map((p) => (
