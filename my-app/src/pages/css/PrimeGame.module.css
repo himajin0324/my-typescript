@@ -21,7 +21,7 @@
     z-index: 10;
 }
 .panel {
-    background: rgb(141, 143, 141);
+    background: rgb(85, 85, 85);
     border-radius: 20px;
     box-shadow: 0 8px 28px rgba(14,42,80,0.06);
     padding: 40px 32px;
