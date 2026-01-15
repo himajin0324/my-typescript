@@ -40,10 +40,10 @@ body {
 }
 
 .profImg {
-    object-fit: cover;
-    border-radius: 5%;
-    height: 200px;
-    width: 200px;
+    object-fit: contain;
+    border-radius: 30px;
+    max-width: 300px;
+    max-height: 300px;
 }
 
 @media (max-width: 768px) {

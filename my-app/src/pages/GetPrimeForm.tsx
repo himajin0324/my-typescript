@@ -42,6 +42,9 @@ export default function GetPrimeForm(){
     return(<div>
         <center><h1>素数チェッカー</h1></center>
         <div className={classes.container}>
+            <div className={classes.concBox}>
+                {result}  
+            </div>
             <input
                 type="text"
                 ref={inputRef}
@@ -52,9 +55,6 @@ export default function GetPrimeForm(){
                 }}
             />
             <button onClick={handleClick} className={classes.button}>素数判定</button>
-            <div className={classes.concBox}>
-                {result}  
-            </div>
         </div>
     </div>
     );
