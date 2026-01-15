@@ -41,3 +41,27 @@
 .button:active {
     transform: scale(0.98);
 }
+
+@media (max-width: 768px) {
+    .title {
+        font-size: 3em;
+        letter-spacing: 1px;
+    }
+    
+    .button {
+        padding: 16px 40px;
+        font-size: 1.4em;
+    }
+}
+
+@media (max-width: 480px) {
+    .title {
+        font-size: 2em;
+        letter-spacing: 0.5px;
+    }
+    
+    .button {
+        padding: 12px 30px;
+        font-size: 1.1em;
+    }
+}
