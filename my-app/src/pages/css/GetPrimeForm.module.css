@@ -58,8 +58,8 @@ position: https://saruwakakun.com/html-css/basic/relative-absolute-fixed
 .concBox{
     position: relative;
     margin-top: 32px;
-    margin-left: auto;
-    margin-right: auto;
+    margin-left: 0;
+    margin-right: 0;
     font-family: "DotGothic16", sans-serif;
     font-size: 2.2rem;
     background: linear-gradient(180deg, #111827 0%, #0f1724 100%);
@@ -73,6 +73,7 @@ position: https://saruwakakun.com/html-css/basic/relative-absolute-fixed
     display: flex;
     align-items: center;
     justify-content: center;
+    box-sizing: border-box;
 }
 
 @media (max-width: 480px) {
@@ -101,6 +102,8 @@ position: https://saruwakakun.com/html-css/basic/relative-absolute-fixed
         font-size: 1.5rem;
         padding: 16px 8px;
         margin-top: 16px;
+        margin-left: 0;
+        margin-right: 0;
         max-width: 100%;
         min-height: 70px;
     }
