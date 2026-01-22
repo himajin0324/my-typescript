@@ -7,21 +7,36 @@
     background: rgb(141, 143, 141);
     z-index: 0;
 }
+.time {
+    position: absolute;
+    top: -5px;
+    left: 20px;
+    font-size: 1.2rem;
+    font-weight: bold;
+    font-family: "DotGothic16","Arial";
+    color: #ff0000;
+    background: rgba(255, 255, 255, 0.7);
+    padding: 8px 16px;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(14,42,80,0.1);
+    z-index: 10;
+}
 .score {
     position: absolute;
-    top: 0px;
+    top: -5px;
     right: 20px;
     font-size: 1.2rem;
     font-weight: bold;
+    font-family: "DotGothic16","Arial";
     color: #1e40af;
-    background: rgba(255, 255, 255, 0.9);
+    background: rgba(255, 255, 255, 0.7);
     padding: 8px 16px;
     border-radius: 8px;
     box-shadow: 0 2px 8px rgba(14,42,80,0.1);
     z-index: 10;
 }
 .panel {
-    background: rgb(85, 85, 85);
+    background: rgb(150, 150, 150);
     border-radius: 20px;
     box-shadow: 0 8px 28px rgba(14,42,80,0.06);
     padding: 40px 32px;
@@ -31,19 +46,9 @@
     overflow: hidden;
     z-index: 1;
 }
-.bgVideo {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    z-index: 0;
-    border-radius: 20px;
-    pointer-events: none;
-}
 .title {
     font-size: 2rem;
+    font-family: "DotGothic16","Arial";
     margin-bottom: 24px;
     color: #ffffff;
     font-weight: 700;
@@ -56,6 +61,7 @@
 }
 .target {
     font-size: 1.3rem;
+    font-family: "DotGothic16","Arial";
     margin-bottom: 12px;
     position: relative;
     z-index: 1;
@@ -69,15 +75,17 @@
     margin-left: 8px;
 }
 .input {
-    font-size: 1.7rem;
+    font-size: 2rem;
     margin-bottom: 12px;
+    font-family: "DotGothic16","Arial";
     position: relative;
     z-index: 1;
 }
 .message {
     color: #54ff93;
-    font-size: 1.8rem;
-    font-weight: 700;
+    font-family: "DotGothic16","Arial";
+    font-size: 1.2rem;
+    font-weight: 600;
     min-height: 24px;
     margin-bottom: 18px;
     position: relative;
@@ -105,6 +113,7 @@
     aspect-ratio: 1 / 1;
     max-width: 70px;
     font-size: 1.9rem;
+    font-family: "DotGothic16","Arial";
     font-weight: bold;
     margin: 4px 0;
     cursor: pointer;
@@ -128,6 +137,7 @@
     max-width: 70px;
     font-size: 1.1rem;
     font-weight: bold;
+    font-family: "DotGothic16","Arial";
     margin: 4px 0;
     cursor: pointer;
     box-shadow: 0 6px 18px rgba(15,23,42,0.06);
@@ -150,6 +160,7 @@
     max-width: 70px;
     font-size: 1.1rem;
     font-weight: bold;
+    font-family: "DotGothic16","Arial";
     margin: 4px 0;
     cursor: pointer;
     box-shadow: 0 6px 18px rgba(15,23,42,0.06);
@@ -189,10 +200,44 @@
         font-size: 0.8rem;
         margin: 2px 0;
     }
-    .bgVideo {
-        display: none;
-    }
     .panel {
         background: linear-gradient(135deg, #e6f0ff 0%, #f8fbff 100%);
     }
+}
+
+.resultScore {
+    font-size: 3rem;
+    font-family: "DotGothic16","Arial";
+    font-weight: 800;
+    color: #1e40af;
+    margin-bottom: 40px;
+    padding: 30px;
+    background: rgba(30, 64, 175, 0.1);
+    border-radius: 15px;
+    border: 3px solid #1e40af;
+    position: relative;
+    z-index: 2;
+}
+
+.resultButton {
+    background: linear-gradient(90deg, #1e40af 40%, #2563eb 100%);
+    color: #fff;
+    border: none;
+    border-radius: 12px;
+    padding: 16px 32px;
+    font-size: 1.3rem;
+    font-family: "DotGothic16","Arial";
+    font-weight: bold;
+    margin: 15px 0;
+    cursor: pointer;
+    box-shadow: 0 6px 18px rgba(15,23,42,0.06);
+    transition: transform 0.1s;
+    width: 90%;
+    position: relative;
+    z-index: 2;
+}
+
+.resultButton:hover {
+    transform: scale(1.06);
+    background: linear-gradient(90deg, #3b82f6 40%, #60a5fa 100%);
 }

@@ -1,8 +1,7 @@
 //素因数分解ゲーム
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { makeTarget } from "./scripts/MathManager.ts";
 import classes from "./css/PrimeGame.module.css";
-import videoBack from "./img/videoback.mp4";
 
 export default function PrimeGame(){
     //値の保持に通常の変数を用いない：初期化対策(Reactの機能)
@@ -22,6 +21,30 @@ export default function PrimeGame(){
     const [Target, setTarget] = useState<number>(makeTarget(primes, 2));
     //スコア
     const [Score, setScore] = useState<number>(0);
+    //制限時間:1minutes
+    const targetSecond = 60;
+    //残り時間を格納する
+    const [Second, setSecond] = useState<number>(targetSecond);
+    //ゲーム終了フラグ
+    const [isGameOver, setIsGameOver] = useState<boolean>(false);
+    //残り時間を更新
+    const updateCountDown = () => {
+        if (Second <= 0){
+            setSecond(0);
+            setIsGameOver(true);//0になったら終了
+        }
+        else setSecond(prev => prev - 1);
+    }
+    //1秒毎に残り時間を更新
+    //ボタンクリックなど，コンポーネントがレンダリングされる毎に
+    //setIntervalが実行され，タイマーが毎回新たに作成されてしまうため，
+    //useEffectを使って一度だけ作成し，最後にclearする
+    //useEffect関数は[]に入っている値のどれかが更新されたら実行される
+    useEffect(() => {
+        if (isGameOver) return;
+        const timer = setInterval(updateCountDown, 1000);
+        return () => clearInterval(timer);
+    }, [isGameOver, Second]);
     //画面に入力素数を表示
     const onPrime = (n:number) => {
         setInput((prev) => [...prev, n]);
@@ -88,14 +111,15 @@ export default function PrimeGame(){
         }
     }
     return (
-        <div className={classes.center}>
-            <div className={classes.panel}>
-                <div className={classes.score}>Score: {Score}</div>
-                <video autoPlay loop muted playsInline className={classes.bgVideo} controlsList="nofullscreen">
-                    <source src={videoBack} type="video/mp4" />
-                </video>
+        isGameOver ? (
+            <PrimeGameResultComponent score={Score} />
+        ) : (
+            <div className={classes.center}>
+                <div className={classes.panel}>
+                <div className={classes.time}>TIME: {Second} s</div>
+                <div className={classes.score}>SCORE: {Score}</div>
                 <h2 className={classes.title}>素因数分解ゲーム</h2>
-                <div className={classes.target}>Target: <span>{Target}</span></div>
+                <div className={classes.target}><span>{Target}</span></div>
                 <div className={classes.input}>入力: <span>{inputString}</span></div>
                 <div className={classes.message}>{message}</div>
                 <div className={classes.buttonArea}>
@@ -122,6 +146,25 @@ export default function PrimeGame(){
                     ))}
                     <button className={classes.divButton} onClick={autoDiv}>割る</button>
                 </div>
+            </div>
+        </div>
+        )
+    );
+}
+
+function PrimeGameResultComponent({ score }: { score: number }) {
+    const handleRetry = () => {
+        window.location.reload();
+    }
+    
+    return (
+        <div className={classes.center}>
+            <div className={classes.panel}>
+                <h2 className={classes.title}>ゲーム終了</h2>
+                <div className={classes.resultScore}>YOUR SCORE: {score}</div>
+                <button className={classes.resultButton} onClick={handleRetry}>
+                    もう一度プレイ
+                </button>
             </div>
         </div>
     );
