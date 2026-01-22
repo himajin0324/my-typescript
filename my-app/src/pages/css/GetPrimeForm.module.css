@@ -3,12 +3,34 @@ div {
     margin-left: auto;
     margin-right: auto;
 }
+
+.title {
+    font-size: 3rem;
+    font-weight: 900;
+    text-align: center;
+    margin: 30px 0 20px 0;
+    background: linear-gradient(135deg, #000000 0%, #764ba2 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    font-family: "DotGothic16", "Arial Black", sans-serif;
+    text-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+    letter-spacing: 2px;
+    filter: drop-shadow(0 4px 8px rgba(102, 126, 234, 0.25));
+}
+
+.text {
+    font-family: "DotGothic16";
+    font-weight: bold;
+    font-size: 1.2rem;
+}
+
 /*
 position: https://saruwakakun.com/html-css/basic/relative-absolute-fixed
 */
 .container{
     position: relative;
-    background: linear-gradient(180deg, #0f1724 0%, #0b1220 100%);
+    background: linear-gradient(180deg, #bbd5ff 0%, #0b1220 100%);
     width: 100%;
     max-width: 480px;
     min-height: 340px;
@@ -24,7 +46,7 @@ position: https://saruwakakun.com/html-css/basic/relative-absolute-fixed
 .button {
     font-family: "DotGothic16", sans-serif;
     text-align: center;
-    background: linear-gradient(90deg, #1f2937 0%, #374151 100%);
+    background: linear-gradient(90deg, #010203 0%, #374151 100%);
     color: #ffffff;
     border-radius: 24px;
     box-shadow: 0 6px 18px rgba(2,6,23,0.6);
@@ -45,15 +67,26 @@ position: https://saruwakakun.com/html-css/basic/relative-absolute-fixed
     font-size: 2rem;
     font-family: "DotGothic16", sans-serif;
     text-align: center;
-    background-color: #0f1724;
+    background-color: #4e6282;
     color: #f8fafc;
-    border: 2px solid #475569;
+    border: 2px solid #63748e;
     border-radius: 12px;
     height: 60px;
     width: 240px;
     margin-bottom: 24px;
     margin-top: 12px;
     box-shadow: 0 6px 18px rgba(2,6,23,0.45) inset;
+}
+
+.inputBox::placeholder {
+    color: rgba(248, 250, 252, 0.4);
+    opacity: 1;
+    font-size: 1rem;
+}
+
+.inputBox::-ms-input-placeholder {
+    color: rgba(248, 250, 252, 0.4);
+    font-size: 1rem;
 }
 .concBox{
     position: relative;
@@ -63,6 +96,7 @@ position: https://saruwakakun.com/html-css/basic/relative-absolute-fixed
     font-family: "DotGothic16", sans-serif;
     font-size: 2.2rem;
     background: linear-gradient(180deg, #111827 0%, #0f1724 100%);
+    border: 2px solid #4e6282;
     border-radius: 12px;
     box-shadow: 0 6px 18px rgba(2,6,23,0.5);
     padding: 24px 12px;
@@ -77,6 +111,11 @@ position: https://saruwakakun.com/html-css/basic/relative-absolute-fixed
 }
 
 @media (max-width: 480px) {
+    .title {
+        font-size: 2rem;
+        letter-spacing: 1px;
+        margin: 20px 0 15px 0;
+    }
     .container {
         width: 90vw;
         max-width: 90vw;

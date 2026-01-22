@@ -40,15 +40,17 @@ export default function GetPrimeForm(){
     }
 
     return(<div>
-        <center><h1>素数チェッカー</h1></center>
+        <h1 className={classes.title}>素数チェッカー</h1>
         <div className={classes.container}>
+            <div className={classes.text}>入力した値が素数かどうかを判定することができます．</div>
             <div className={classes.concBox}>
-                {result}  
+                {result}
             </div>
             <input
                 type="text"
                 ref={inputRef}
                 className={classes.inputBox}
+                placeholder="整数値を入力してください"
                 onKeyDown={e => {
                     //Enterキーでも入力OK
                     if (e.key === "Enter") handleClick();

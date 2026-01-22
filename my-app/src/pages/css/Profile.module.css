@@ -44,18 +44,30 @@ body {
 
 .profImgContainer {
     display: flex;
-    gap: 15px;
+    gap: 35px 50px;
     margin-bottom: 20px;
     justify-content: flex-start;
     flex-wrap: wrap;
+    width: 100%;
+    padding: 10px;
 }
 
 .profImg {
-    object-fit: contain;
-    border-radius: 30px;
-    max-width: 300px;
-    max-height: 300px;
+    object-fit: cover;
+    border-radius: 0;
+    max-width: 150px;
+    transition: transform 0.3s ease;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2),
+                0 0 20px rgba(102, 126, 234, 0.15);
+    filter: drop-shadow(0 8px 12px rgba(0, 0, 0, 0.1));
 }
+
+.profImg:hover {
+    transform: scale(1.1);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3),
+                0 0 30px rgba(102, 126, 234, 0.25);
+}
+
 
 @media (max-width: 768px) {
     .profileContainer {
