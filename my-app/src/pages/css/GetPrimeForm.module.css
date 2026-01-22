@@ -58,6 +58,8 @@ position: https://saruwakakun.com/html-css/basic/relative-absolute-fixed
 .concBox{
     position: relative;
     margin-top: 32px;
+    margin-left: auto;
+    margin-right: auto;
     font-family: "DotGothic16", sans-serif;
     font-size: 2.2rem;
     background: linear-gradient(180deg, #111827 0%, #0f1724 100%);
