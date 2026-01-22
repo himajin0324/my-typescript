@@ -3,6 +3,7 @@ import classes from "./css/FooterMenu.module.css";
 
 export default function FooterMenu(){
     return(<div>
+        <div className={classes.title}>Variousなサイト</div>
         <nav>
             <ul className={classes.menu}>
                 <li className={classes.menuList}><Link to="/Profile" className={classes.menuLink}>Home</Link></li>

@@ -15,7 +15,7 @@ export default function GetPrimeForm(){
             -(10**9) >= inputNum || 
             inputNum >= 10**9){
             setResult(<div>
-                正常値を入力してください。(-_-メ)
+                正常値を入力してください．
             </div>);
             return;
         }

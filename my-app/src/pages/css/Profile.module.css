@@ -31,6 +31,17 @@ body {
     line-height: 1.6;
 }
 
+.thankYouMessage {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #ff6b9d;
+    text-align: center;
+    margin-bottom: 20px;
+    letter-spacing: 2px;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    text-shadow: 2px 2px 4px rgba(255, 107, 157, 0.2);
+}
+
 .profImgContainer {
     display: flex;
     gap: 15px;
@@ -56,6 +67,11 @@ body {
         font-size: 0.95rem;
     }
     
+    .thankYouMessage {
+        font-size: 1.5rem;
+        letter-spacing: 1px;
+    }
+    
     .profImg {
         max-width: 200px;
         max-height: 200px;
@@ -71,6 +87,12 @@ body {
     
     .profText {
         font-size: 0.85rem;
+    }
+    
+    .thankYouMessage {
+        font-size: 1.2rem;
+        letter-spacing: 0.5px;
+        margin-bottom: 15px;
     }
     
     .profImg {
