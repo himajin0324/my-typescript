@@ -72,3 +72,34 @@ position: https://saruwakakun.com/html-css/basic/relative-absolute-fixed
     align-items: center;
     justify-content: center;
 }
+
+@media (max-width: 480px) {
+    .container {
+        width: 90vw;
+        max-width: 90vw;
+        margin: 20px auto;
+        padding: 20px 16px;
+        min-height: auto;
+    }
+    .inputBox {
+        font-size: 1.5rem;
+        height: 50px;
+        width: 85%;
+        max-width: 100%;
+        margin-bottom: 16px;
+        margin-top: 8px;
+    }
+    .button {
+        height: 48px;
+        width: 80%;
+        font-size: 1rem;
+        margin-top: 8px;
+    }
+    .concBox {
+        font-size: 1.5rem;
+        padding: 16px 8px;
+        margin-top: 16px;
+        max-width: 100%;
+        min-height: 70px;
+    }
+}
