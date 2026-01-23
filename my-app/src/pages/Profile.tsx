@@ -1,5 +1,6 @@
 import classes from "./css/Profile.module.css";
 import { useState, useEffect } from "react";
+
 import { Accordion } from "./scripts/Accordion.tsx";
 
 export default function Profile(){
