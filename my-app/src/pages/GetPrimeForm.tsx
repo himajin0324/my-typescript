@@ -1,7 +1,7 @@
 import classes from "./css/GetPrimeForm.module.css";
 import { useRef, useState } from "react";
-import { isPrime, fact, get_Prime_Place } from "./scripts/MathManager.ts";
-import { label, LoadNum, SaveNum } from "./scripts/DataManager.ts";
+import { isPrime, fact, get_Prime_Place, mersenne_det } from "./scripts/MathManager.ts";
+import { label, LoadNum, SaveNum, } from "./scripts/DataManager.ts";
 
 export default function GetPrimeForm(){
     const inputRef = useRef<HTMLInputElement>(null);
@@ -24,10 +24,23 @@ export default function GetPrimeForm(){
         {
             //入力値が素数
             if (isPrime(inputNum) == true){
-                setResult(<div>
-                    {inputNum}は素数<br></br>
-                    {get_Prime_Place(inputNum)}番目の素数です
-                </div>);
+                //メルセンヌ数の判定
+                const mer = mersenne_det(inputNum);
+                if (mer != 0)
+                {
+                    setResult(<div>
+                        {inputNum}は素数<br></br>
+                        {get_Prime_Place(inputNum)}番目の素数です<br></br>
+                        メルセンヌ素数({mer})です
+                    </div>);
+                }
+                else
+                {
+                    setResult(<div>
+                        {inputNum}は素数<br></br>
+                        {get_Prime_Place(inputNum)}番目の素数です
+                    </div>);
+                }
             }
             else {
                 setResult(<div>

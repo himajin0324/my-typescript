@@ -18,18 +18,18 @@ export default function PrimeGame(){
     //使える素数
     const primes = [2,3,5,7,11,13]
     //割るターゲット
-    const [Target, setTarget] = useState<number>(makeTarget(primes, 2));
+    const [Target, setTarget] = useState<number>(makeTarget(primes, 3));
     //スコア
     const [Score, setScore] = useState<number>(0);
     //制限時間:1minutes
     const targetSecond = 60;
     //残り時間を格納する
-    const [Second, setSecond] = useState<number>(targetSecond);
+    const [second, setSecond] = useState<number>(targetSecond);
     //ゲーム終了フラグ
     const [isGameOver, setIsGameOver] = useState<boolean>(false);
     //残り時間を更新
     const updateCountDown = () => {
-        if (Second <= 0){
+        if (second <= 0){
             setSecond(0);
             setIsGameOver(true);//0になったら終了
         }
@@ -44,9 +44,10 @@ export default function PrimeGame(){
         if (isGameOver) return;
         const timer = setInterval(updateCountDown, 1000);
         return () => clearInterval(timer);
-    }, [isGameOver, Second]);
+    }, [isGameOver, second]);
     //画面に入力素数を表示
     const onPrime = (n:number) => {
+        //無限に入力できてしまうので修正する
         setInput((prev) => [...prev, n]);
         setInputString((prev) => (prev === "" ? `${n}` : `${prev}×${n}`));
     }
@@ -70,7 +71,7 @@ export default function PrimeGame(){
                 setMessage("");
                 if (result === 1) {
                     setMessage("クリア！");
-                    setTarget(makeTarget(primes, 2));
+                    setTarget(makeTarget(primes, 3));
                     setScore(prev => prev + 1);
                 }
                 return;
@@ -116,7 +117,7 @@ export default function PrimeGame(){
         ) : (
             <div className={classes.center}>
                 <div className={classes.panel}>
-                <div className={classes.time}>TIME: {Second} s</div>
+                <div className={classes.time}>TIME: {second} s</div>
                 <div className={classes.score}>SCORE: {Score}</div>
                 <h2 className={classes.title}>素因数分解ゲーム</h2>
                 <div className={classes.target}><span>{Target}</span></div>

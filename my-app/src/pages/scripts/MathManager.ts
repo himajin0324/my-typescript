@@ -71,3 +71,12 @@ export const fact = (n:number) => {
     }
     return str;
 }
+//メルセンヌ数かどうかを判定する(2^n-1の形で文字列を返す)
+export const mersenne_det = (n:number) => {
+    if (Number.isInteger(Math.log2(n + 1)))
+    {
+        const str = "2^" + String(Math.log2(n + 1)) + " - 1";
+        return str;
+    }
+    else return 0;
+}
