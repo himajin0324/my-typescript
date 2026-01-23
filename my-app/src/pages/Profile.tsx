@@ -1,26 +1,31 @@
 import classes from "./css/Profile.module.css";
-import profileImg1 from "./img/profile (0).jpeg";
-import profileImg2 from "./img/profile (1).jpg";
-import profileImg3 from "./img/profile (2).jpg";
-import profileImg4 from "./img/profile (3).jpg";
-import profileImg5 from "./img/profile (4).jpg";
-import profileImg6 from "./img/profile (5).jpg";
-import profileImg7 from "./img/profile (6).jpg";
-import profileImg8 from "./img/profile (7).jpg";
-import profileImg9 from "./img/profile (8).jpg";
-import profileImg10 from "./img/profile (9).jpg";
+import { useState, useEffect } from "react";
 import { Accordion } from "./scripts/Accordion.tsx";
 
 export default function Profile(){
+    const [selectedImages, setSelectedImages] = useState<string[]>([]);
+    
+    useEffect(() => {
+        const imgs = import.meta.glob<{ default: string }>('./img/*.jpg', { eager: true });
+        const imgsArray = Object.values(imgs).map(mod => mod.default);
+        
+        // ランダムに3つ選ぶ
+        const shuffled = imgsArray.sort(() => Math.random() - 0.5);
+        setSelectedImages(shuffled.slice(0, 3));
+    }, []);
+    
+    const [img0, img1, img2] = selectedImages;
     return(<div className={classes.body}>
         <div className={classes.profileContainer}>
             <div className={classes.profText}>
                 <div className={classes.thankYouMessage}>アクセスありがとうございます！:)✨</div>
                 <div className={classes.textContainer}>
-                    たくさんの趣味たち⇒
-                    <Accordion>
                     <div className={classes.profImgContainer}>
-                        <img className={classes.profImg} src={profileImg1} alt="profImg1" />
+                        <img className={classes.profImg} src={img0} alt="profImg0" />
+                        <img className={classes.profImg} src={img1} alt="profImg1" />
+                        <img className={classes.profImg} src={img2} alt="profImg2" />
+                                                
+                        {/* <img className={classes.profImg} src={profileImg1} alt="profImg1" />
                         <img className={classes.profImg} src={profileImg2} alt="profImg2" />
                         <img className={classes.profImg} src={profileImg3} alt="profImg3" />
                         <img className={classes.profImg} src={profileImg4} alt="profImg4" />
@@ -29,10 +34,9 @@ export default function Profile(){
                         <img className={classes.profImg} src={profileImg7} alt="profImg7" />
                         <img className={classes.profImg} src={profileImg8} alt="profImg8" />
                         <img className={classes.profImg} src={profileImg9} alt="profImg9" />
-                        <img className={classes.profImg} src={profileImg10} alt="profImg10" />
+                        <img className={classes.profImg} src={profileImg10} alt="profImg10" /> */}
                     </div>
-                    </Accordion><br/>
-                    MyProfile:<br/>
+                    MyProfile<br/>
                     ニックネーム：はぎ<br/>
                     生年月日：2005年3月24日生<br/>
                     血液型：O型<br/>
