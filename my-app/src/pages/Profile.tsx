@@ -12,6 +12,7 @@ export default function Profile(){
         const imgsArray = Object.values(imgs).map(mod => mod.default);
         
         // ランダムに3つ選ぶ
+        //ソートした配列の先頭3つ取ってくる
         const shuffled = imgsArray.sort(() => Math.random() - 0.5);
         setSelectedImages(shuffled.slice(0, 3));
     }, []);
@@ -37,6 +38,7 @@ export default function Profile(){
                             </div>
                         </div>
                     )}
+                    ↑↑画像をタップで拡大表示<br/>
                     MyProfile<br/>
                     ニックネーム：はぎ<br/>
                     生年月日：2005年3月24日生<br/>

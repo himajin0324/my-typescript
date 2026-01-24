@@ -50,6 +50,21 @@ body {
     letter-spacing: 2px;
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     text-shadow: 2px 2px 4px rgba(255, 107, 157, 0.2);
+    animation: popIn 1.5s ease-out forwards;
+}
+
+@keyframes popIn {
+    0% {
+        opacity: 0;
+        transform: scale(0.5); /* 最初は半分くらいのサイズ */
+    }
+    50% {
+        transform: scale(1.4); /* 一瞬だけ元のサイズより少し大きく（弾む感じ） */
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1);   /* 最終的に元のサイズに落ち着く */
+    }
 }
 
 .profImgContainer {
@@ -71,6 +86,7 @@ body {
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2),
                 0 0 20px rgba(102, 126, 234, 0.15);
     filter: drop-shadow(0 8px 12px rgba(0, 0, 0, 0.1));
+    animation: popIn 1.5s ease-out forwards;
 }
 
 .profImg:hover {
@@ -129,14 +145,6 @@ body {
   transform: scale(1.2);
 }
 
-/* スマホ用の微調整（画面が狭い場合） */
-@media (max-width: 600px) {
-  .closeButton {
-    top: -50px;
-    right: -10px;
-    font-size: 40px; /* 指で押しやすいように大きく */
-  }
-}
 /* スマホ用の微調整（画面が狭い場合） */
 @media (max-width: 600px) {
   .closeButton {
