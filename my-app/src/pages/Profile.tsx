@@ -5,6 +5,7 @@ import { Accordion } from "./scripts/Accordion.tsx";
 
 export default function Profile(){
     const [selectedImages, setSelectedImages] = useState<string[]>([]);
+    const [activeImg, setActiveImg] = useState<string | null>(null);
     
     useEffect(() => {
         const imgs = import.meta.glob<{ default: string }>('./img/*.jpg', { eager: true });
@@ -22,21 +23,20 @@ export default function Profile(){
                 <div className={classes.thankYouMessage}>アクセスありがとうございます！:)✨</div>
                 <div className={classes.textContainer}>
                     <div className={classes.profImgContainer}>
-                        <img className={classes.profImg} src={img0} alt="profImg0" />
-                        <img className={classes.profImg} src={img1} alt="profImg1" />
-                        <img className={classes.profImg} src={img2} alt="profImg2" />
-                                                
-                        {/* <img className={classes.profImg} src={profileImg1} alt="profImg1" />
-                        <img className={classes.profImg} src={profileImg2} alt="profImg2" />
-                        <img className={classes.profImg} src={profileImg3} alt="profImg3" />
-                        <img className={classes.profImg} src={profileImg4} alt="profImg4" />
-                        <img className={classes.profImg} src={profileImg5} alt="profImg5" />
-                        <img className={classes.profImg} src={profileImg6} alt="profImg6" />
-                        <img className={classes.profImg} src={profileImg7} alt="profImg7" />
-                        <img className={classes.profImg} src={profileImg8} alt="profImg8" />
-                        <img className={classes.profImg} src={profileImg9} alt="profImg9" />
-                        <img className={classes.profImg} src={profileImg10} alt="profImg10" /> */}
+                        <img className={classes.profImg} src={img0} alt="profImg0" onClick={() => setActiveImg(img0)}/>
+                        <img className={classes.profImg} src={img1} alt="profImg1" onClick={() => setActiveImg(img1)}/>
+                        <img className={classes.profImg} src={img2} alt="profImg2" onClick={() => setActiveImg(img2)}/>
                     </div>
+                    {activeImg && (
+                        <div className={classes.overlay} onClick={() => setActiveImg(null)}>
+                            <div className={classes.modalContent} onClick = {(e) => e.stopPropagation()}>
+                                <button className={classes.closeButton} onClick={() => setActiveImg(null)}>
+                                    ×閉じる
+                                </button>
+                                <img src={activeImg} alt="Enlarged" className={classes.zoomImg} />
+                            </div>
+                        </div>
+                    )}
                     MyProfile<br/>
                     ニックネーム：はぎ<br/>
                     生年月日：2005年3月24日生<br/>
