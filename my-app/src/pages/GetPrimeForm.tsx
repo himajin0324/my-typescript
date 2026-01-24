@@ -1,11 +1,19 @@
 import classes from "./css/GetPrimeForm.module.css";
-import { useRef, useState } from "react";
+import { useRef, useState, useEffect } from "react";
 import { isPrime, fact, get_Prime_Place, mersenne_det } from "./scripts/MathManager.ts";
-import { label, LoadNum, SaveNum, } from "./scripts/DataManager.ts";
+import { LoadNum, SaveNum, } from "./scripts/DataManager.ts";
+
+//前回入力した値，次の入力値と同じであれば判定を行わない
+//リロードでリセットされる
+let previousNum: number | null = null;
 
 export default function GetPrimeForm(){
     const inputRef = useRef<HTMLInputElement>(null);
     const [result, setResult] = useState<React.JSX.Element | null>(null);
+    //ページに戻ってきたときだけ実行
+    useEffect(() => {
+        previousNum = null;
+    }, []);
     const handleClick = () => {
         //入力値がnull or NaN（数値以外）
         if (!inputRef.current)return;
@@ -19,8 +27,9 @@ export default function GetPrimeForm(){
             </div>);
             return;
         }
+        console.log("previousNum：", previousNum);
         //判定は1回のみ
-        if (LoadNum(label.pre_number) != inputNum)
+        if (previousNum === null || previousNum !== inputNum)
         {
             //入力値が素数
             if (isPrime(inputNum) == true){
@@ -31,7 +40,8 @@ export default function GetPrimeForm(){
                     setResult(<div>
                         {inputNum}は素数<br></br>
                         {get_Prime_Place(inputNum)}番目の素数です<br></br>
-                        メルセンヌ素数({mer})です
+                        メルセンヌ素数({mer})です!!!<br></br>
+                        神出鬼没(？)な素数
                     </div>);
                 }
                 else
@@ -48,7 +58,7 @@ export default function GetPrimeForm(){
                     {fact(inputNum)}
                 </div>);
             }
-            SaveNum(label.pre_number, inputNum);
+            previousNum = inputNum;
         }
     }
 

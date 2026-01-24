@@ -9,7 +9,7 @@
 }
 
 .title {
-    font-size: 2.5rem;
+    font-size: 3rem;
     font-weight: bold;
     text-align: center;
     padding: 20px 10px;
@@ -17,7 +17,7 @@
     color: #ffffff;
     font-family: "ヒラギノ角ゴシック ProN", "游ゴシック Medium", Arial;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
-    letter-spacing: 3px;
+    letter-spacing: 50px;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
     border-bottom: 3px solid rgba(255, 255, 255, 0.3);
 }
@@ -42,7 +42,8 @@
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    font-weight: 600;
+    font-weight: bold;
+    letter-spacing: 4px;
     transition: all 0.3s ease;
     border-bottom: 3px solid transparent;
     border-right: 1px solid rgba(0, 0, 0, 0.15);

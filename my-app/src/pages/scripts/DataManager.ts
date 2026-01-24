@@ -5,7 +5,6 @@ export const label = {
     prime: "Number", 
     today: "TodayDate", 
     date_stored: "Date_Stored", 
-    pre_number: "PreviousNumber"
 };
 //素数を保存するかロードするか
 export const SetNum = () => {
