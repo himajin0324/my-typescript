@@ -1,7 +1,6 @@
 import classes from "./css/GetPrimeForm.module.css";
 import { useRef, useState, useEffect } from "react";
 import { isPrime, fact, get_Prime_Place, mersenne_det } from "./scripts/MathManager.ts";
-import { LoadNum, SaveNum, } from "./scripts/DataManager.ts";
 
 //前回入力した値，次の入力値と同じであれば判定を行わない
 //リロードでリセットされる
