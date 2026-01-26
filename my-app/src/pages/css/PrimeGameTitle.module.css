@@ -11,7 +11,7 @@
 
 .title {
     font-family: "DotGothic16";
-    font-size: 4.5em;
+    font-size: 4.5rem;
     font-weight: bold;
     color: #3b3b3b;
     text-align: center;
@@ -22,7 +22,7 @@
 
 .button {
     padding: 20px 50px;
-    font-size: 1.8em;
+    font-size: 1.8rem;
     font-family: "DotGothic16";
     font-weight: bold;
     color: #ffffff;
@@ -46,24 +46,34 @@
 
 @media (max-width: 768px) {
     .title {
-        font-size: 3em;
+        font-size: 3rem;
         letter-spacing: 1px;
     }
     
     .button {
         padding: 16px 40px;
-        font-size: 1.4em;
+        font-size: 1.4rem;
     }
 }
 
 @media (max-width: 480px) {
+    .container {
+        gap: 30px;
+        padding: 0 20px;
+    }
+
     .title {
-        font-size: 2em;
-        letter-spacing: 0.5px;
+        font-size: 2.8rem;
+        letter-spacing: 1px;
+        line-height: 1.2;
     }
     
     .button {
-        padding: 12px 30px;
-        font-size: 1.1em;
+        padding: 18px 40px;
+        font-size: 1.6rem;
+        width: 80%; /* 横幅を広げてタップしやすくする */
+        max-width: 280px;
+        border-radius: 15px; /* 丸すぎると文字が入りにくいので少し角を残す */
+        text-align: center;
     }
 }
