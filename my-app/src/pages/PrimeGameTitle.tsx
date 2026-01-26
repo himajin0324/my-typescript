@@ -15,6 +15,7 @@ export default function PrimeGameTitle(){
             <button className={classes.button} onClick={() => handleStart("easy")}>イージー</button>
             <button className={classes.button} onClick={() => handleStart("normal")}>ノーマル</button>
             <button className={classes.button} onClick={() => handleStart("hard")}>ハード</button>
+            <button className={classes.button} onClick={() => navigate("/PrimeGameRanking")}>ランキングをチェックする</button>
         </div>
     );
 }

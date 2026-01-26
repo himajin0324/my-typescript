@@ -2,6 +2,8 @@
 import { useState, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { makeTarget } from "./scripts/MathManager.ts";
+import { db } from "./scripts/firebase.ts";
+import { collection, addDoc, serverTimestamp } from "firebase/firestore";
 import classes from "./css/PrimeGame.module.css";
 
 
@@ -41,7 +43,7 @@ export default function PrimeGame(){
     //スコア
     const [Score, setScore] = useState<number>(0);
     //制限時間:1minutes
-    const targetSecond = 60;
+    const targetSecond = 10;
     //残り時間を格納する
     const [second, setSecond] = useState<number>(targetSecond);
     //ゲーム終了フラグ
@@ -134,7 +136,7 @@ export default function PrimeGame(){
         case "easy":
             return (
                 isGameOver ? (
-                    <PrimeGameResultComponent score={Score} />
+                    <SetDatabaseComponent score={Score} difficulty={difficulty} />
                 ) : (
                     <div className={classes.center}>
                         <div className={classes.panel}>
@@ -175,7 +177,7 @@ export default function PrimeGame(){
         case "normal":
             return (
                 isGameOver ? (
-                    <PrimeGameResultComponent score={Score} />
+                    <SetDatabaseComponent score={Score} difficulty={difficulty} />
                 ) : (
                     <div className={classes.center}>
                         <div className={classes.panel}>
@@ -216,7 +218,7 @@ export default function PrimeGame(){
         case "hard":
             return (
                 isGameOver ? (
-                    <PrimeGameResultComponent score={Score} />
+                    <SetDatabaseComponent score={Score} difficulty={difficulty} />
                 ) : (
                     <div className={classes.center}>
                         <div className={classes.panel}>
@@ -268,7 +270,7 @@ export default function PrimeGame(){
         default:
             return (
                 isGameOver ? (
-                    <PrimeGameResultComponent score={Score} />
+                    <SetDatabaseComponent score={Score} difficulty={difficulty} />
                 ) : (
                     <div className={classes.center}>
                         <div className={classes.panel}>
@@ -311,6 +313,69 @@ export default function PrimeGame(){
     }
 
 }
+function SetDatabaseComponent({ score, difficulty }: { score: number, difficulty: string }) {
+    const [name, setName] = useState<string>("");
+    const [isSaved, setIsSaved] = useState<boolean>(false);//二重送信防止用
+    //Enter
+    const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+        if (e.key === 'Enter') {
+            e.preventDefault(); // フォーム送信のデフォルト動作を防ぐ
+            handleSave();
+        }
+    };
+    const handleSave = async () => {
+        if (isSaved) return;
+        //名前が未設定の場合"のなめ"
+        const finalName = name.trim() || "のなめ";
+        try {
+            await addDoc(collection(db, "RANKINGs"), {
+                userName: finalName,
+                userScore: score,
+                userDifficulty: difficulty,
+                createdAt: serverTimestamp(),
+            });
+            alert("ランキングに登録されました！");
+            setIsSaved(true);
+        }
+        catch (error){
+            console.error("保存失敗:", error);
+            alert("保存失敗");
+        }
+    }
+    if (isSaved){
+        return (<PrimeGameResultComponent score={score} />);
+    }
+    return (
+        <div className={classes.center}>
+            <div className={classes.panel}>
+                <h2 className={classes.title}>記録に挑戦！</h2>
+                <div className={classes.resultScore}>SCORE: {score}</div>
+                
+                <div className={classes.inputArea}>
+                    <input
+                        type="text"
+                        placeholder="なまえをいれてね"
+                        className={classes.nameInput}
+                        value={name}
+                        onChange={(e) => setName(e.target.value)}
+                        onKeyDown={handleKeyDown}
+                        disabled={isSaved}
+                        maxLength={10} // あまり長いとランキングが壊れるので制限
+                        autoFocus
+                    />
+                    <button 
+                        onClick={handleSave} 
+                        disabled={isSaved}
+                        className={classes.saveButton}
+                    >
+                        {isSaved ? "送信中..." : "ランキングに登録"}
+                    </button>
+                </div>
+                {isSaved && <p className={classes.message}>データを送っているよ...</p>}
+            </div>
+        </div>
+    );
+}
 
 function PrimeGameResultComponent({ score }: { score: number }) {
     const navigate = useNavigate();
@@ -320,10 +385,10 @@ function PrimeGameResultComponent({ score }: { score: number }) {
     return (
         <div className={classes.center}>
             <div className={classes.panel}>
-                <h2 className={classes.title}>ゲーム終了</h2>
+                <h2 className={classes.title}>ゲームエンド</h2>
                 <div className={classes.resultScore}>YOUR SCORE: {score}</div>
                 <button className={classes.resultButton} onClick={handleRetry}>
-                    もう一度プレイ
+                    トップに戻る
                 </button>
             </div>
         </div>

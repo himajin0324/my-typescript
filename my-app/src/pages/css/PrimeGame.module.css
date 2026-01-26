@@ -286,3 +286,190 @@
     transform: scale(1.06);
     background: linear-gradient(90deg, #3b82f6 40%, #60a5fa 100%);
 }
+
+/* --- SetDatabaseComponent 用 --- */
+
+.inputArea {
+    margin: 20px 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+    z-index: 2;
+    position: relative;
+}
+
+.nameInput {
+    width: 80%;
+    padding: 12px;
+    font-size: 1.2rem;
+    font-family: "DotGothic16", "Arial";
+    border: 3px solid #1e40af;
+    border-radius: 8px;
+    background: #fff;
+    text-align: center;
+    outline: none;
+    transition: box-shadow 0.2s;
+}
+
+.nameInput:focus {
+    box-shadow: 0 0 10px rgba(37, 99, 235, 0.5);
+}
+
+.nameInput:disabled {
+    background: #e5e7eb;
+    border-color: #9ca3af;
+    color: #6b7280;
+}
+
+.saveButton {
+    /* .resultButton のスタイルをベースに調整 */
+    background: linear-gradient(90deg, #059669 40%, #10b981 100%);
+    color: #fff;
+    border: none;
+    border-radius: 12px;
+    padding: 12px 24px;
+    font-size: 1.2rem;
+    font-family: "DotGothic16", "Arial";
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    transition: transform 0.1s;
+    width: 80%;
+}
+
+.saveButton:hover:not(:disabled) {
+    transform: scale(1.05);
+    background: linear-gradient(90deg, #10b981 40%, #34d399 100%);
+}
+
+.saveButton:disabled {
+    background: #9ca3af;
+    cursor: not-allowed;
+    transform: none;
+}
+
+/* スマホ用調整 */
+@media (max-width: 480px) {
+    .nameInput, .saveButton {
+        width: 100%;
+        font-size: 1.1rem;
+    }
+    
+    .inputArea {
+        margin: 10px 0;
+    }
+}
+
+
+
+
+/* --- RankingPage 用 --- */
+
+.rankingList {
+    margin: 20px 0;
+    text-align: left;
+    max-height: 400px;
+    overflow-y: auto; /* データが多い場合スクロール可能に */
+    padding: 10px;
+    background: rgba(255, 255, 255, 0.5);
+    border-radius: 10px;
+}
+
+.rankingItem {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    border-bottom: 2px dashed #1e40af;
+    font-family: "DotGothic16", "Arial";
+    font-size: 1.2rem;
+}
+
+.rankingItem:last-child {
+    border-bottom: none;
+}
+
+.rank {
+    font-weight: bold;
+    color: #dc2626; /* 順位は赤色 */
+    width: 50px;
+}
+
+.rankName {
+    flex: 1;
+    margin-left: 10px;
+    color: #333;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.rankScore {
+    font-weight: bold;
+    color: #1e40af;
+}
+
+/* スマホ用 */
+@media (max-width: 480px) {
+    .rankingItem {
+        font-size: 1rem;
+        padding: 8px 4px;
+    }
+}
+.tabArea {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.tabButton {
+    padding: 8px 12px;
+    font-family: "DotGothic16", "Arial";
+    font-size: 0.9rem;
+    background: #e5e7eb;
+    border: 2px solid #9ca3af;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.activeTab {
+    background: #1e40af;
+    color: white;
+    border-color: #1e40af;
+    transform: scale(1.1);
+}
+
+.tabButton:hover:not(.activeTab) {
+    background: #d1d5db;
+}
+
+.rankingItem {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 10px;
+    border-bottom: 2px dashed #1e40af;
+}
+
+.rankInfo {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex: 1;
+}
+
+.scoreInfo {
+    display: flex;
+    flex-direction: column; /* スコアと日付を縦に並べる */
+    align-items: flex-end;
+    gap: 2px;
+}
+
+.rankDate {
+    font-size: 0.7rem;
+    color: #666;
+    font-family: "Arial"; /* 数字は見やすいフォントで */
+}
