@@ -14,11 +14,12 @@ export const makePrime = (digit:number) => {
 }
 //引数で指定した因数を持つ値を生成
 export const makeTarget = (arrayFactor:number[], range:number) => {
+    //因数配列
     const facts = [...arrayFactor];//jsでは参照渡しなのでコピー
     let n = 1;
     while (facts.length > 0){
-        //せいぜい2個までの素因数
-        n *= Number(facts.shift())**(Math.floor(Math.random() * range));
+        //せいぜいrange個までの素因数
+        n *= Number(facts.shift())**(Math.floor(Math.random() * (range + 1)));
     }
 
     return n;

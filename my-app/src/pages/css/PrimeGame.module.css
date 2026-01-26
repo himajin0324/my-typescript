@@ -6,6 +6,22 @@
     min-height: 100vh;
     z-index: 0;
 }
+.difficulty {
+    position: absolute;
+    top: 45px;      /* .time の top(-5px) + paddingやフォントサイズ分を考慮して調整 */
+    left: 20px;
+    font-size: 0.9rem; /* TIMEより一回り小さくするとバランスが良い */
+    font-weight: bold;
+    font-family: "DotGothic16","Arial";
+    color: #4b5563;    /* 少し落ち着いた色にするか、難易度別に変えるのがおすすめ */
+    background: rgba(255, 255, 255, 0.8);
+    padding: 4px 12px;
+    border-radius: 6px;
+    z-index: 10;
+}
+.easy { color: #059669; border: 1px solid #059669; }   /* 緑 */
+.normal { color: #d97706; border: 1px solid #d97706; } /* オレンジ */
+.hard { color: #dc2626; border: 1px solid #dc2626; }   /* 赤 */
 .time {
     position: absolute;
     top: -5px;
@@ -38,7 +54,7 @@
     background: rgb(150, 150, 150);
     border-radius: 20px;
     box-shadow: 0 8px 28px rgba(14,42,80,0.06);
-    padding: 40px 32px;
+    padding: 80px 40px 32px;
     text-align: center;
     min-width: 340px;
     position: relative;
@@ -46,22 +62,35 @@
     z-index: 1;
 }
 .title {
+
     font-size: 2rem;
+
     font-family: "DotGothic16","Arial";
+
     margin-bottom: 24px;
+
     color: #ffffff;
+
     font-weight: 700;
+
     letter-spacing: 1px;
+
     position: relative;
+
     z-index: 1;
+
     background: rgb(0, 0, 0);
+
     padding: 8px;
+
     border-radius: 8px;
+
 }
 .target {
     font-size: 1.3rem;
     font-family: "DotGothic16","Arial";
     margin-bottom: 12px;
+    margin-top: 40px;
     position: relative;
     z-index: 1;
     font-size: 1.7rem;
@@ -201,6 +230,17 @@
     }
     .panel {
         background: linear-gradient(135deg, #e6f0ff 0%, #f8fbff 100%);
+    }
+    .time, .score {
+        top: 5px;    /* 上に詰めすぎると画面外にいくので少し下げる */
+        font-size: 1rem;
+        padding: 6px 12px;
+    }
+    
+    .difficulty {
+        top: 45px;   /* スマホでもTIMEのすぐ下に */
+        left: 20px;
+        font-size: 0.8rem;
     }
 }
 
