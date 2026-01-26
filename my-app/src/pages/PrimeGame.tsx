@@ -43,7 +43,7 @@ export default function PrimeGame(){
     //スコア
     const [Score, setScore] = useState<number>(0);
     //制限時間:1minutes
-    const targetSecond = 10;
+    const targetSecond = 60;
     //残り時間を格納する
     const [second, setSecond] = useState<number>(targetSecond);
     //ゲーム終了フラグ
