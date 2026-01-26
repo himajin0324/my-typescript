@@ -16,10 +16,19 @@ export const makePrime = (digit:number) => {
 export const makeTarget = (arrayFactor:number[], range:number) => {
     //因数配列
     const facts = [...arrayFactor];//jsでは参照渡しなのでコピー
+    //因数配列を1/2ずつに分ける
+    const size = Math.floor(facts.length / 2);
+    const facts_small = [...facts].slice(0, size);//小さい因数
+    const facts_big = [...facts].slice(size);//大きい因数
     let n = 1;
-    while (facts.length > 0){
+    while (facts_small.length > 0){
         //せいぜいrange個までの素因数
-        n *= Number(facts.shift())**(Math.floor(Math.random() * (range + 1)));
+        n *= Number(facts_small.shift())**(Math.floor(Math.random() * (range + 1)));
+    }
+    while (facts_big.length > 0)
+    {
+        //せいぜいrange-1個までの素因数⇒大きい因数ほど現れにくくなる
+        n *= Number(facts_big.shift())**(Math.floor(Math.random() * (range)));
     }
 
     return n;

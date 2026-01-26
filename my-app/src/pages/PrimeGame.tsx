@@ -23,8 +23,8 @@ export default function PrimeGame(){
     //難易度別使える素数
     const difficultySettings: Record<string, { primes: number[], range: number }> = {
         easy: {
-            primes: [2, 3, 5, 7, 11, 13],
-            range: 1
+            primes: [2, 3, 5, 7],
+            range: 2
         },
         normal: {
             primes: [2, 3, 5, 7, 11, 13],
@@ -32,7 +32,7 @@ export default function PrimeGame(){
         },
         hard: {
             primes: [2, 3, 5, 7, 11, 13, 17, 19, 23],
-            range: 1
+            range: 2
         }
     };
     const setting = difficultySettings[difficulty] || difficultySettings.normal;
@@ -132,6 +132,46 @@ export default function PrimeGame(){
     }
     switch (difficulty) {
         case "easy":
+            return (
+                isGameOver ? (
+                    <PrimeGameResultComponent score={Score} />
+                ) : (
+                    <div className={classes.center}>
+                        <div className={classes.panel}>
+                            <div className={classes.time}>TIME: {second} s</div>
+                            <div className={classes.score}>SCORE: {Score}</div>
+                            <div className={`${classes.difficulty} ${classes[difficulty]}`}>LEVEL: {difficulty.toUpperCase()}</div>
+                            <div className={classes.target}><span>{Target}</span></div>
+                            <div className={classes.input}>入力: <span>{inputString}</span></div>
+                            <div className={classes.message}>{message}</div>
+                            <div className={classes.buttonArea}>
+                                {setting.primes.slice(0, 2).map((p) => (
+                                    <button
+                                        key={p}
+                                        className={classes.primeButton}
+                                        onClick={() => onPrime(p)}
+                                    >
+                                        {p}
+                                    </button>
+                                ))}
+                                <button className={classes.clearButton} onClick={deleteInput}>消す</button>
+                            </div>
+                            <div className={classes.buttonArea}>
+                                {setting.primes.slice(2, 4).map((p) => (
+                                    <button
+                                        key={p}
+                                        className={classes.primeButton}
+                                        onClick={() => onPrime(p)}
+                                    >
+                                        {p}
+                                    </button>
+                                ))}
+                                <button className={classes.divButton} onClick={autoDiv}>割る</button>
+                            </div>
+                    </div>
+                </div>
+                )
+            );
         case "normal":
             return (
                 isGameOver ? (
