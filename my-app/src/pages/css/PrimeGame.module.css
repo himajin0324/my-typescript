@@ -210,40 +210,37 @@
 @media (max-width: 420px) {
     .panel {
         min-width: 90vw;
-        padding: 20px 16px;
+        padding: 60px 16px 32px;
     }
     .buttonArea {
-        grid-template-columns: repeat(4, 1fr);
+        display: flex;
+        flex-wrap: nowrap; 
         gap: 6px;
         max-width: 100%;
         margin: 0 auto 8px;
     }
     .primeButton {
         max-width: 100%;
-        font-size: 0.9rem;
+        font-size: 1.5rem;
         margin: 2px 0;
+        line-height: 1;
     }
-    .clearButton {
+    .clearButton, .divButton {
         max-width: 100%;
-        font-size: 0.8rem;
-        margin: 2px 0;
-    }
-    .divButton {
-        max-width: 100%;
-        font-size: 0.8rem;
+        font-size: 1rem; 
         margin: 2px 0;
     }
     .panel {
         background: linear-gradient(135deg, #e6f0ff 0%, #f8fbff 100%);
     }
     .time, .score {
-        top: 5px;    /* 上に詰めすぎると画面外にいくので少し下げる */
-        font-size: 1rem;
+        top: 5px;    
+        font-size: 1.1rem;
         padding: 6px 12px;
     }
     
     .difficulty {
-        top: 45px;   /* スマホでもTIMEのすぐ下に */
+        top: 35px;   
         left: 20px;
         font-size: 0.8rem;
     }
