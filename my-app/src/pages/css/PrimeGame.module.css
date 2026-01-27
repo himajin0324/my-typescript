@@ -233,8 +233,13 @@
         .panel {
             background: linear-gradient(135deg, #8b8b8b 0%, #d8dee6 100%);
         }
-        .time, .score {
-            top: 40px;    
+        .time {
+            top: 5px;    
+            font-size: 1.1rem;
+            padding: 6px 12px;
+        }
+        .score {
+            top: 40px;
             font-size: 1.1rem;
             padding: 6px 12px;
         }
