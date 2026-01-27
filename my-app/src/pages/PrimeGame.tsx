@@ -52,6 +52,8 @@ export default function PrimeGame(){
     const targetSecond = 60;
     //残り時間を格納する
     const [second, setSecond] = useState<number>(targetSecond);
+    //割ってる最中か
+    const [isCalculating, setIsCalculating] = useState<boolean>(false);
     //ゲーム終了フラグ
     const [isGameOver, setIsGameOver] = useState<boolean>(false);
     //中断中か
@@ -83,10 +85,12 @@ export default function PrimeGame(){
     //自動で割る処理
     const autoDiv = () => {
         //入力値が無い場合
-        if (input.length <= 1 && Target !== 1) {
-            setMessage("素数を選んでください");
+        if (input.length <= 1 || isCalculating) {
+            if (Target !== 1 && !isCalculating)setMessage("素数を選んでください");
             return;
         }
+        setIsCalculating(true);
+        setMessage("");
         let result = Target;
         let i = 1;
         //割り算
@@ -97,12 +101,12 @@ export default function PrimeGame(){
                 //全て割り終わった
                 setInput([1]);
                 setInputString("");
-                setMessage("");
                 if (result === 1) {
                     setMessage("クリア！");
                     setTarget(makeTarget(setting.primes, setting.range));
                     setScore(prev => prev + 1);
                 }
+                setIsCalculating(false);
                 return;
             }
             //入力値で割り切れた
@@ -125,6 +129,7 @@ export default function PrimeGame(){
                 setInput([1]);
                 setInputString("");
                 setMessage("割れませんでした！");
+                setIsCalculating(false);
             }
         }
         step();
@@ -140,12 +145,15 @@ export default function PrimeGame(){
             setInputString(inputPrimes.join("×"));            
         }
     }
+    //一時停止
     const onQuit = () => {
         setIsPaused(true);
     }
+    //ゲームに戻る
     const resumeGame = () => {
         setIsPaused(false);
     }
+    //タイトルに戻る
     const goTitle = () => {
         navigate("/PrimeGameTitle");
     }
@@ -188,7 +196,7 @@ export default function PrimeGame(){
                         ))}
                         {/*1行目:消す，2行目:割る*/}
                         {index === 0 && <button className={classes.clearButton} onClick={deleteInput}>消す</button>}
-                        {index === 1 && <button className={classes.divButton} onClick={autoDiv}>割る</button>}
+                        {index === 1 && <button className={classes.divButton} onClick={autoDiv} disabled={isCalculating}>割る</button>}
                     </div>
                 ))}
             </div>
