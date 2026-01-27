@@ -484,13 +484,13 @@
     position: absolute;
     top: 15px;     /* SCORE(-5px) のさらに上に配置 */
     right: 20px;    /* SCOREの右端に揃える */
-    background: #475569; /* ダークグレーで引き締める */
+    background: #ff5050; /* ダークグレーで引き締める */
     color: #fff;
-    border: 2px solid #fff; /* 枠線を付けて視認性を上げる */
+    border: 1.5px solid #fff; /* 枠線を付けて視認性を上げる */
     padding: 4px 12px;
     border-radius: 8px;
     cursor: pointer;
-    font-size: 1rem;
+    font-size: 1.3rem;
     font-family: "DotGothic16", "Arial";
     z-index: 20;
     transition: all 0.2s;
@@ -498,7 +498,7 @@
 }
 
 .quitButton:hover {
-    background: #1e293b;
+    background: #840101;
     transform: translateY(-2px); /* 少し浮き上がる演出 */
 }
 
