@@ -195,7 +195,7 @@ export default function PrimeGame(){
                             </button>
                         ))}
                         {/*1行目:消す，2行目:割る*/}
-                        {index === 0 && <button className={classes.clearButton} onClick={deleteInput}>消す</button>}
+                        {index === 0 && <button className={classes.clearButton} onClick={deleteInput} disabled={isCalculating}>消す</button>}
                         {index === 1 && <button className={classes.divButton} onClick={autoDiv} disabled={isCalculating}>割る</button>}
                     </div>
                 ))}

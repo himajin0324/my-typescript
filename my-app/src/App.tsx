@@ -1,4 +1,4 @@
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, useLocation } from "react-router-dom";
 import TodayPrime from "./pages/TodayPrime";
 import Profile from "./pages/Profile";
 import GetPrimeForm from "./pages/GetPrimeForm";
@@ -8,8 +8,12 @@ import PrimeGameTitle from "./pages/PrimeGameTitle";
 import PrimeGameRanking from "./pages/PrimeGameRanking";
 
 export default function App(){
+    const location = useLocation();
+    //このパスではメニューを表示させない
+    const hideMenuPath = ["/PrimeGame"];
+
     return(<div>
-        <FooterMenu />
+        {!hideMenuPath.includes(location.pathname) && <FooterMenu />}
         <Routes>
             <Route path="/" element={<Profile />}/>
             <Route path="/Profile" element={<Profile />}/>
