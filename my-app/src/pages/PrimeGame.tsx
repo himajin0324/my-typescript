@@ -85,8 +85,9 @@ export default function PrimeGame(){
     //自動で割る処理
     const autoDiv = () => {
         //入力値が無い場合
-        if (input.length <= 1 || isCalculating) {
-            if (Target !== 1 && !isCalculating)setMessage("素数を選んでください");
+        if (isCalculating)return;
+        if (input.length <= 1 && Target !== 1) {
+            setMessage("素数を選んでください");
             return;
         }
         setIsCalculating(true);
@@ -96,6 +97,7 @@ export default function PrimeGame(){
         //割り算
         function step() {
             const prime = input[i];
+            console.log(prime);
             //入力値を使い切った
             if (i >= input.length) {
                 //全て割り終わった
@@ -190,6 +192,7 @@ export default function PrimeGame(){
                                 key={p}
                                 className={classes.primeButton}
                                 onClick={() => onPrime(p)}
+                                disabled={isCalculating}
                             >
                                 {p}
                             </button>
