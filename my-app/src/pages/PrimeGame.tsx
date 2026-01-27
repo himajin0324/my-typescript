@@ -179,7 +179,7 @@ export default function PrimeGame(){
                 <div className={classes.time}>TIME: {second} s</div>
                 <div className={classes.score}>SCORE: {Score}</div>
                 <div className={`${classes.difficulty} ${classes[difficulty]}`}>LEVEL: {difficulty.toUpperCase()}</div>
-                <button className={classes.quitButton} onClick={onQuit}>||</button>
+                <button className={classes.quitButton} onClick={onQuit} disabled={isCalculating}>||</button>
                 <div className={classes.target}><span>{Target}</span></div>
                 <div className={classes.input}>入力: <span>{inputString}</span></div>
                 <div className={classes.message}>{message}</div>
