@@ -507,7 +507,7 @@
     .quitButton {
         top: 15px;    /* スマホでは少し位置を詰める */
         right: 15px;
-        font-size: 0.7rem;
+        font-size: 1.3rem;
         padding: 2px 8px;
     }
 }
