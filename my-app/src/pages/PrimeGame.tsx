@@ -9,6 +9,7 @@ import classes from "./css/PrimeGame.module.css";
 
 export default function PrimeGame(){
     const location = useLocation();
+    const navigate = useNavigate();
     //難易度(String)：デフォ値はノーマル
     const difficulty = location.state?.level || "normal";
     //値の保持に通常の変数を用いない：初期化対策(Reactの機能)
@@ -37,6 +38,11 @@ export default function PrimeGame(){
             range: 2
         }
     };
+    const LAYOUT_CONFIG: Record<string, number[][]> = {
+        easy: [[0, 2], [2, 4]],   // 1行目はslice(0,2)、2行目はslice(2,4)
+        normal: [[0, 3], [3, 6]], // 1行目はslice(0,3)、2行目はslice(3,6)
+        hard: [[0, 3], [3, 6], [6, 9]]
+    };
     const setting = difficultySettings[difficulty] || difficultySettings.normal;
     //割るターゲット
     const [Target, setTarget] = useState<number>(makeTarget(setting.primes, setting.range));
@@ -48,6 +54,8 @@ export default function PrimeGame(){
     const [second, setSecond] = useState<number>(targetSecond);
     //ゲーム終了フラグ
     const [isGameOver, setIsGameOver] = useState<boolean>(false);
+    //中断中か
+    const [isPaused, setIsPaused] = useState<boolean>(false);
     //残り時間を更新
     const updateCountDown = () => {
         if (second <= 0){
@@ -62,10 +70,10 @@ export default function PrimeGame(){
     //useEffectを使って一度だけ作成し，最後にclearする
     //useEffect関数は[]に入っている値のどれかが更新されたら実行される
     useEffect(() => {
-        if (isGameOver) return;
+        if (isGameOver || isPaused) return;
         const timer = setInterval(updateCountDown, 1000);
         return () => clearInterval(timer);
-    }, [isGameOver, second]);
+    }, [isGameOver, isPaused, second]);
     //画面に入力素数を表示
     const onPrime = (n:number) => {
         //無限に入力できてしまうので修正する
@@ -132,187 +140,65 @@ export default function PrimeGame(){
             setInputString(inputPrimes.join("×"));            
         }
     }
-    switch (difficulty) {
-        case "easy":
-            return (
-                isGameOver ? (
-                    <SetDatabaseComponent score={Score} difficulty={difficulty} />
-                ) : (
-                    <div className={classes.center}>
-                        <div className={classes.panel}>
-                            <div className={classes.time}>TIME: {second} s</div>
-                            <div className={classes.score}>SCORE: {Score}</div>
-                            <div className={`${classes.difficulty} ${classes[difficulty]}`}>LEVEL: {difficulty.toUpperCase()}</div>
-                            <div className={classes.target}><span>{Target}</span></div>
-                            <div className={classes.input}>入力: <span>{inputString}</span></div>
-                            <div className={classes.message}>{message}</div>
-                            <div className={classes.buttonArea}>
-                                {setting.primes.slice(0, 2).map((p) => (
-                                    <button
-                                        key={p}
-                                        className={classes.primeButton}
-                                        onClick={() => onPrime(p)}
-                                    >
-                                        {p}
-                                    </button>
-                                ))}
-                                <button className={classes.clearButton} onClick={deleteInput}>消す</button>
-                            </div>
-                            <div className={classes.buttonArea}>
-                                {setting.primes.slice(2, 4).map((p) => (
-                                    <button
-                                        key={p}
-                                        className={classes.primeButton}
-                                        onClick={() => onPrime(p)}
-                                    >
-                                        {p}
-                                    </button>
-                                ))}
-                                <button className={classes.divButton} onClick={autoDiv}>割る</button>
-                            </div>
-                    </div>
-                </div>
-                )
-            );
-        case "normal":
-            return (
-                isGameOver ? (
-                    <SetDatabaseComponent score={Score} difficulty={difficulty} />
-                ) : (
-                    <div className={classes.center}>
-                        <div className={classes.panel}>
-                            <div className={classes.time}>TIME: {second} s</div>
-                            <div className={classes.score}>SCORE: {Score}</div>
-                            <div className={`${classes.difficulty} ${classes[difficulty]}`}>LEVEL: {difficulty.toUpperCase()}</div>
-                            <div className={classes.target}><span>{Target}</span></div>
-                            <div className={classes.input}>入力: <span>{inputString}</span></div>
-                            <div className={classes.message}>{message}</div>
-                            <div className={classes.buttonArea}>
-                                {setting.primes.slice(0, 3).map((p) => (
-                                    <button
-                                        key={p}
-                                        className={classes.primeButton}
-                                        onClick={() => onPrime(p)}
-                                    >
-                                        {p}
-                                    </button>
-                                ))}
-                                <button className={classes.clearButton} onClick={deleteInput}>消す</button>
-                            </div>
-                            <div className={classes.buttonArea}>
-                                {setting.primes.slice(3, 6).map((p) => (
-                                    <button
-                                        key={p}
-                                        className={classes.primeButton}
-                                        onClick={() => onPrime(p)}
-                                    >
-                                        {p}
-                                    </button>
-                                ))}
-                                <button className={classes.divButton} onClick={autoDiv}>割る</button>
-                            </div>
-                    </div>
-                </div>
-                )
-            );
-        case "hard":
-            return (
-                isGameOver ? (
-                    <SetDatabaseComponent score={Score} difficulty={difficulty} />
-                ) : (
-                    <div className={classes.center}>
-                        <div className={classes.panel}>
-                            <div className={classes.time}>TIME: {second} s</div>
-                            <div className={classes.score}>SCORE: {Score}</div>
-                            <div className={`${classes.difficulty} ${classes[difficulty]}`}>LEVEL: {difficulty.toUpperCase()}</div>
-                            <div className={classes.target}><span>{Target}</span></div>
-                            <div className={classes.input}>入力: <span>{inputString}</span></div>
-                            <div className={classes.message}>{message}</div>
-                            <div className={classes.buttonArea}>
-                                {setting.primes.slice(0, 3).map((p) => (
-                                    <button
-                                        key={p}
-                                        className={classes.primeButton}
-                                        onClick={() => onPrime(p)}
-                                    >
-                                        {p}
-                                    </button>
-                                ))}
-                                <button className={classes.clearButton} onClick={deleteInput}>消す</button>
-                            </div>
-                            <div className={classes.buttonArea}>
-                                {setting.primes.slice(3, 6).map((p) => (
-                                    <button
-                                        key={p}
-                                        className={classes.primeButton}
-                                        onClick={() => onPrime(p)}
-                                    >
-                                        {p}
-                                    </button>
-                                ))}
-                                <button className={classes.divButton} onClick={autoDiv}>割る</button>
-                            </div>
-                            <div className={classes.buttonArea}>
-                                {setting.primes.slice(6, 9).map((p) => (
-                                    <button
-                                        key={p}
-                                        className={classes.primeButton}
-                                        onClick={() => onPrime(p)}
-                                    >
-                                        {p}
-                                    </button>
-                                ))}
-                            </div>
-                    </div>
-                </div>
-                )
-            );
-        default:
-            return (
-                isGameOver ? (
-                    <SetDatabaseComponent score={Score} difficulty={difficulty} />
-                ) : (
-                    <div className={classes.center}>
-                        <div className={classes.panel}>
-                            <div className={classes.time}>TIME: {second} s</div>
-                            <div className={classes.score}>SCORE: {Score}</div>
-                            <div className={`${classes.difficulty} ${classes[difficulty]}`}>LEVEL: {difficulty.toUpperCase()}</div>
-                            <div className={classes.target}><span>{Target}</span></div>
-                            <div className={classes.input}>入力: <span>{inputString}</span></div>
-                            <div className={classes.message}>{message}</div>
-                            <div className={classes.buttonArea}>
-                                {setting.primes.slice(0, 3).map((p) => (
-                                    <button
-                                        key={p}
-                                        className={classes.primeButton}
-                                        onClick={() => onPrime(p)}
-                                    >
-                                        {p}
-                                    </button>
-                                ))}
-                                <button className={classes.clearButton} onClick={deleteInput}>消す</button>
-                            </div>
-                            <div className={classes.buttonArea}>
-                                {setting.primes.slice(3, 6).map((p) => (
-                                    <button
-                                        key={p}
-                                        className={classes.primeButton}
-                                        onClick={() => onPrime(p)}
-                                    >
-                                        {p}
-                                    </button>
-                                ))}
-                                <button className={classes.divButton} onClick={autoDiv}>割る</button>
-                            </div>
-                    </div>
-                </div>
-                )
-            );
-
-    
+    const onQuit = () => {
+        setIsPaused(true);
     }
+    const resumeGame = () => {
+        setIsPaused(false);
+    }
+    const goTitle = () => {
+        navigate("/PrimeGameTitle");
+    }
+    if(isGameOver)return(<SetDatabaseComponent score={Score} difficulty={difficulty} />);
+    if(isPaused){
+        return(
+            <div className={classes.center}>
+                <div className={classes.panel}>
+                    <h2 className={classes.title}>一時停止中</h2>   
+                    <div className={classes.menuArea}>
+                        <button className={`${classes.menuButton} ${classes.bgBlue}`} onClick={resumeGame}>ゲームを続ける</button>
+                        <button className={`${classes.menuButton} ${classes.bgRed}`} onClick={goTitle}>タイトルに戻る</button>
+                    </div>
+                </div>
+            </div>
+        );
+    }
+    //レイアウト取得
+    const rows = LAYOUT_CONFIG[difficulty] || LAYOUT_CONFIG.normal;
+    return (
+        <div className={classes.center}>
+            <div className={classes.panel}>
+                <div className={classes.time}>TIME: {second} s</div>
+                <div className={classes.score}>SCORE: {Score}</div>
+                <div className={`${classes.difficulty} ${classes[difficulty]}`}>LEVEL: {difficulty.toUpperCase()}</div>
+                <button className={classes.quitButton} onClick={onQuit}>ゲームを中断する</button>
+                <div className={classes.target}><span>{Target}</span></div>
+                <div className={classes.input}>入力: <span>{inputString}</span></div>
+                <div className={classes.message}>{message}</div>
+                {rows.map((range, index) => (
+                    <div key={index} className={classes.buttonArea}>
+                        {setting.primes.slice(range[0], range[1]).map((p) => (
+                            <button
+                                key={p}
+                                className={classes.primeButton}
+                                onClick={() => onPrime(p)}
+                            >
+                                {p}
+                            </button>
+                        ))}
+                        {/*1行目:消す，2行目:割る*/}
+                        {index === 0 && <button className={classes.clearButton} onClick={deleteInput}>消す</button>}
+                        {index === 1 && <button className={classes.divButton} onClick={autoDiv}>割る</button>}
+                    </div>
+                ))}
+            </div>
+        </div>
+      
+    );
+
 
 }
+//スコア登録
 function SetDatabaseComponent({ score, difficulty }: { score: number, difficulty: string }) {
     const [name, setName] = useState<string>("");
     const [isSaved, setIsSaved] = useState<boolean>(false);//二重送信防止用

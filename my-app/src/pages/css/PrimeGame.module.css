@@ -1,475 +1,552 @@
-.center {
-    position: relative;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-    z-index: 0;
-}
-.difficulty {
-    position: absolute;
-    top: 45px;      /* .time の top(-5px) + paddingやフォントサイズ分を考慮して調整 */
-    left: 20px;
-    font-size: 0.9rem; /* TIMEより一回り小さくするとバランスが良い */
-    font-weight: bold;
-    font-family: "DotGothic16","Arial";
-    color: #4b5563;    /* 少し落ち着いた色にするか、難易度別に変えるのがおすすめ */
-    background: rgba(255, 255, 255, 0.8);
-    padding: 4px 12px;
-    border-radius: 6px;
-    z-index: 10;
-}
-.easy { color: #059669; border: 1px solid #059669; }   /* 緑 */
-.normal { color: #d97706; border: 1px solid #d97706; } /* オレンジ */
-.hard { color: #dc2626; border: 1px solid #dc2626; }   /* 赤 */
-.time {
-    position: absolute;
-    top: -5px;
-    left: 20px;
-    font-size: 1.2rem;
-    font-weight: bold;
-    font-family: "DotGothic16","Arial";
-    color: #ff0000;
-    background: rgba(255, 255, 255, 0.7);
-    padding: 8px 16px;
-    border-radius: 8px;
-    box-shadow: 0 2px 8px rgba(14,42,80,0.1);
-    z-index: 10;
-}
-.score {
-    position: absolute;
-    top: -5px;
-    right: 20px;
-    font-size: 1.2rem;
-    font-weight: bold;
-    font-family: "DotGothic16","Arial";
-    color: #1e40af;
-    background: rgba(255, 255, 255, 0.7);
-    padding: 8px 16px;
-    border-radius: 8px;
-    box-shadow: 0 2px 8px rgba(14,42,80,0.1);
-    z-index: 10;
-}
-.panel {
-    background: rgb(150, 150, 150);
-    border-radius: 20px;
-    box-shadow: 0 8px 28px rgba(14,42,80,0.06);
-    padding: 80px 40px 32px;
-    text-align: center;
-    min-width: 340px;
-    position: relative;
-    overflow: hidden;
-    z-index: 1;
-}
-.title {
-
-    font-size: 2rem;
-
-    font-family: "DotGothic16","Arial";
-
-    margin-bottom: 24px;
-
-    color: #ffffff;
-
-    font-weight: 700;
-
-    letter-spacing: 1px;
-
-    position: relative;
-
-    z-index: 1;
-
-    background: rgb(0, 0, 0);
-
-    padding: 8px;
-
-    border-radius: 8px;
-
-}
-.target {
-    font-size: 1.3rem;
-    font-family: "DotGothic16","Arial";
-    margin-bottom: 12px;
-    margin-top: 40px;
-    position: relative;
-    z-index: 1;
-    font-size: 1.7rem;
-}
-.target span {
-    display: inline-block;
-    font-size: 3rem;
-    color: #000000;
-    font-weight: 800;
-    margin-left: 8px;
-}
-.input {
-    font-size: 2rem;
-    margin-bottom: 12px;
-    font-family: "DotGothic16","Arial";
-    position: relative;
-    z-index: 1;
-}
-.message {
-    color: #54ff93;
-    font-family: "DotGothic16","Arial";
-    font-size: 1.2rem;
-    font-weight: 600;
-    min-height: 24px;
-    margin-bottom: 18px;
-    position: relative;
-    z-index: 1;
-}
-.buttonArea {
-    display: flex;
-    flex-wrap: nowrap;
-    justify-content: center;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 8px;
-    justify-items: center;
-    position: relative;
-    z-index: 1;
-    align-items: center;
-    width: 100%;
-    max-width: 320px;
-    margin: 0 auto 10px;
-    grid-auto-rows: 1fr;
-}
-.primeButton {
-    background: linear-gradient(90deg, #1e40af 40%, #2563eb 100%);
-    color: #fff;
-    border: none;
-    border-radius: 12px;
-    width: 100%;
-    aspect-ratio: 1 / 1;
-    max-width: 70px;
-    font-size: 1.9rem;
-    font-family: "DotGothic16","Arial";
-    font-weight: bold;
-    margin: 4px 0;
-    cursor: pointer;
-    box-shadow: 0 6px 18px rgba(15,23,42,0.06);
-    transition: transform 0.1s;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-}
-.primeButton:hover {
-    transform: scale(1.06);
-    background: linear-gradient(90deg, #3b82f6 40%, #60a5fa 100%);
-}
-.clearButton {
-    background: linear-gradient(90deg, #dc2626 40%, #ef4444 100%);
-    color: #fff;
-    border: none;
-    border-radius: 12px;
-    width: 100%;
-    aspect-ratio: 1 / 1;
-    max-width: 70px;
-    font-size: 1.1rem;
-    font-weight: bold;
-    font-family: "DotGothic16","Arial";
-    margin: 4px 0;
-    cursor: pointer;
-    box-shadow: 0 6px 18px rgba(15,23,42,0.06);
-    transition: transform 0.1s;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-}
-.clearButton:hover {
-    transform: scale(1.06);
-    background: linear-gradient(90deg, #991b1b 40%, #dc2626 100%);
-}
-.divButton {
-    background: linear-gradient(90deg, #60a5fa 40%, #2563eb 100%);
-    color: #fff;
-    border: none;
-    border-radius: 12px;
-    width: 100%;
-    aspect-ratio: 1 / 1;
-    max-width: 70px;
-    font-size: 1.1rem;
-    font-weight: bold;
-    font-family: "DotGothic16","Arial";
-    margin: 4px 0;
-    cursor: pointer;
-    box-shadow: 0 6px 18px rgba(15,23,42,0.06);
-    transition: transform 0.1s;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-}
-.divButton:hover {
-    transform: scale(1.06);
-    background: linear-gradient(90deg, #93c5fd 40%, #60a5fa 100%);
-}
-.primeButton, .clearButton, .divButton {
-    flex: 1;                 /* すべてのボタンを均等な幅にする */
-    min-width: 60px;         /* 小さくなりすぎないように */
-}
-@media (max-width: 480px) {
+    .center {
+        position: relative;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        z-index: 0;
+    }
+    .difficulty {
+        position: absolute;
+        top: 45px;      /* .time の top(-5px) + paddingやフォントサイズ分を考慮して調整 */
+        left: 20px;
+        font-size: 0.9rem; /* TIMEより一回り小さくするとバランスが良い */
+        font-weight: bold;
+        font-family: "DotGothic16","Arial";
+        color: #4b5563;    /* 少し落ち着いた色にするか、難易度別に変えるのがおすすめ */
+        background: rgba(255, 255, 255, 0.8);
+        padding: 4px 12px;
+        border-radius: 6px;
+        z-index: 10;
+    }
+    .easy { color: #059669; border: 1px solid #059669; }   /* 緑 */
+    .normal { color: #d97706; border: 1px solid #d97706; } /* オレンジ */
+    .hard { color: #dc2626; border: 1px solid #dc2626; }   /* 赤 */
+    .time {
+        position: absolute;
+        top: -5px;
+        left: 20px;
+        font-size: 1.2rem;
+        font-weight: bold;
+        font-family: "DotGothic16","Arial";
+        color: #ff0000;
+        background: rgba(255, 255, 255, 0.7);
+        padding: 8px 16px;
+        border-radius: 8px;
+        box-shadow: 0 2px 8px rgba(14,42,80,0.1);
+        z-index: 10;
+    }
+    .score {
+        position: absolute;
+        top: 40px;
+        right: 20px;
+        font-size: 1.2rem;
+        font-weight: bold;
+        font-family: "DotGothic16","Arial";
+        color: #1e40af;
+        background: rgba(255, 255, 255, 0.7);
+        padding: 8px 16px;
+        border-radius: 8px;
+        box-shadow: 0 2px 8px rgba(14,42,80,0.1);
+        z-index: 10;
+    }
     .panel {
-        min-width: 90vw;
-        padding: 85px 16px 32px;
+        background: rgb(150, 150, 150);
+        border-radius: 20px;
+        box-shadow: 0 8px 28px rgba(14,42,80,0.06);
+        padding: 80px 40px 32px;
+        text-align: center;
+        min-width: 340px;
+        position: relative;
+        overflow: hidden;
+        z-index: 1;
+    }
+    .title {
+
+        font-size: 2rem;
+
+        font-family: "DotGothic16","Arial";
+
+        margin-bottom: 24px;
+
+        color: #ffffff;
+
+        font-weight: 700;
+
+        letter-spacing: 1px;
+
+        position: relative;
+
+        z-index: 1;
+
+        background: rgb(0, 0, 0);
+
+        padding: 8px;
+
+        border-radius: 8px;
+
+    }
+    .target {
+        font-size: 1.3rem;
+        font-family: "DotGothic16","Arial";
+        margin-bottom: 12px;
+        margin-top: 40px;
+        position: relative;
+        z-index: 1;
+        font-size: 1.7rem;
+    }
+    .target span {
+        display: inline-block;
+        font-size: 3rem;
+        color: #000000;
+        font-weight: 800;
+        margin-left: 8px;
+    }
+    .input {
+        font-size: 2rem;
+        margin-bottom: 12px;
+        font-family: "DotGothic16","Arial";
+        position: relative;
+        z-index: 1;
+    }
+    .message {
+        color: #54ff93;
+        font-family: "DotGothic16","Arial";
+        font-size: 1.2rem;
+        font-weight: 600;
+        min-height: 24px;
+        margin-bottom: 18px;
+        position: relative;
+        z-index: 1;
     }
     .buttonArea {
         display: flex;
-        flex-wrap: nowrap; 
-        gap: 6px;
-        max-width: 100%;
-        margin: 0 auto 8px;
+        flex-wrap: nowrap;
+        justify-content: center;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 8px;
+        justify-items: center;
+        position: relative;
+        z-index: 1;
+        align-items: center;
+        width: 100%;
+        max-width: 320px;
+        margin: 0 auto 10px;
+        grid-auto-rows: 1fr;
     }
     .primeButton {
-        max-width: 100%;
-        font-size: 1.5rem;
-        margin: 2px 0;
-        line-height: 1;
+        background: linear-gradient(90deg, #1e40af 40%, #2563eb 100%);
+        color: #fff;
+        border: none;
+        border-radius: 12px;
+        width: 100%;
+        aspect-ratio: 1 / 1;
+        max-width: 70px;
+        font-size: 1.9rem;
+        font-family: "DotGothic16","Arial";
+        font-weight: bold;
+        margin: 4px 0;
+        cursor: pointer;
+        box-shadow: 0 6px 18px rgba(15,23,42,0.06);
+        transition: transform 0.1s;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
     }
-    .clearButton, .divButton {
-        max-width: 100%;
-        font-size: 1rem; 
-        margin: 2px 0;
+    .primeButton:hover {
+        transform: scale(1.06);
+        background: linear-gradient(90deg, #3b82f6 40%, #60a5fa 100%);
     }
-    .panel {
-        background: linear-gradient(135deg, #e6f0ff 0%, #f8fbff 100%);
-    }
-    .time, .score {
-        top: 5px;    
+    .clearButton {
+        background: linear-gradient(90deg, #dc2626 40%, #ef4444 100%);
+        color: #fff;
+        border: none;
+        border-radius: 12px;
+        width: 100%;
+        aspect-ratio: 1 / 1;
+        max-width: 70px;
         font-size: 1.1rem;
-        padding: 6px 12px;
+        font-weight: bold;
+        font-family: "DotGothic16","Arial";
+        margin: 4px 0;
+        cursor: pointer;
+        box-shadow: 0 6px 18px rgba(15,23,42,0.06);
+        transition: transform 0.1s;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
     }
-    
-    .difficulty {
-        top: 50px;   
-        left: 20px;
-        font-size: 0.8rem;
-        padding: 2px 8px;
+    .clearButton:hover {
+        transform: scale(1.06);
+        background: linear-gradient(90deg, #991b1b 40%, #dc2626 100%);
     }
-    .target {
-        margin-top: 10px;
+    .divButton {
+        background: linear-gradient(90deg, #60a5fa 40%, #2563eb 100%);
+        color: #fff;
+        border: none;
+        border-radius: 12px;
+        width: 100%;
+        aspect-ratio: 1 / 1;
+        max-width: 70px;
+        font-size: 1.1rem;
+        font-weight: bold;
+        font-family: "DotGothic16","Arial";
+        margin: 4px 0;
+        cursor: pointer;
+        box-shadow: 0 6px 18px rgba(15,23,42,0.06);
+        transition: transform 0.1s;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
     }
-}
+    .divButton:hover {
+        transform: scale(1.06);
+        background: linear-gradient(90deg, #93c5fd 40%, #60a5fa 100%);
+    }
+    .primeButton, .clearButton, .divButton {
+        flex: 1;                 /* すべてのボタンを均等な幅にする */
+        min-width: 60px;         /* 小さくなりすぎないように */
+    }
+    @media (max-width: 480px) {
+        .panel {
+            min-width: 90vw;
+            padding: 85px 16px 32px;
+        }
+        .buttonArea {
+            display: flex;
+            flex-wrap: nowrap; 
+            gap: 6px;
+            max-width: 100%;
+            margin: 0 auto 8px;
+        }
+        .primeButton {
+            max-width: 100%;
+            font-size: 1.5rem;
+            margin: 2px 0;
+            line-height: 1;
+        }
+        .clearButton, .divButton {
+            max-width: 100%;
+            font-size: 1rem; 
+            margin: 2px 0;
+        }
+        .panel {
+            background: linear-gradient(135deg, #8b8b8b 0%, #d8dee6 100%);
+        }
+        .time, .score {
+            top: 5px;    
+            font-size: 1.1rem;
+            padding: 6px 12px;
+        }
+        
+        .difficulty {
+            top: 50px;   
+            left: 20px;
+            font-size: 0.8rem;
+            padding: 2px 8px;
+        }
+        .target {
+            margin-top: 10px;
+        }
+    }
 
-.resultScore {
-    font-size: 3rem;
-    font-family: "DotGothic16","Arial";
-    font-weight: 800;
-    color: #1e40af;
-    margin-bottom: 40px;
-    padding: 30px;
-    background: rgba(30, 64, 175, 0.1);
-    border-radius: 15px;
-    border: 3px solid #1e40af;
-    position: relative;
-    z-index: 2;
-}
+    .resultScore {
+        font-size: 3rem;
+        font-family: "DotGothic16","Arial";
+        font-weight: 800;
+        color: #1e40af;
+        margin-bottom: 40px;
+        padding: 30px;
+        background: rgba(30, 64, 175, 0.1);
+        border-radius: 15px;
+        border: 3px solid #1e40af;
+        position: relative;
+        z-index: 2;
+    }
 
-.resultButton {
-    background: linear-gradient(90deg, #1e40af 40%, #2563eb 100%);
+    .resultButton {
+        background: linear-gradient(90deg, #1e40af 40%, #2563eb 100%);
+        color: #fff;
+        border: none;
+        border-radius: 12px;
+        padding: 16px 32px;
+        font-size: 1.3rem;
+        font-family: "DotGothic16","Arial";
+        font-weight: bold;
+        margin: 15px 0;
+        cursor: pointer;
+        box-shadow: 0 6px 18px rgba(15,23,42,0.06);
+        transition: transform 0.1s;
+        width: 90%;
+        position: relative;
+        z-index: 2;
+    }
+
+    .resultButton:hover {
+        transform: scale(1.06);
+        background: linear-gradient(90deg, #3b82f6 40%, #60a5fa 100%);
+    }
+
+    /* --- SetDatabaseComponent 用 --- */
+
+    .inputArea {
+        margin: 20px 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 15px;
+        z-index: 2;
+        position: relative;
+    }
+
+    .nameInput {
+        width: 80%;
+        padding: 12px;
+        font-size: 1.2rem;
+        font-family: "DotGothic16", "Arial";
+        border: 3px solid #1e40af;
+        border-radius: 8px;
+        background: #fff;
+        text-align: center;
+        outline: none;
+        transition: box-shadow 0.2s;
+    }
+
+    .nameInput:focus {
+        box-shadow: 0 0 10px rgba(37, 99, 235, 0.5);
+    }
+
+    .nameInput:disabled {
+        background: #e5e7eb;
+        border-color: #9ca3af;
+        color: #6b7280;
+    }
+
+    .saveButton {
+        /* .resultButton のスタイルをベースに調整 */
+        background: linear-gradient(90deg, #059669 40%, #10b981 100%);
+        color: #fff;
+        border: none;
+        border-radius: 12px;
+        padding: 12px 24px;
+        font-size: 1.2rem;
+        font-family: "DotGothic16", "Arial";
+        font-weight: bold;
+        cursor: pointer;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        transition: transform 0.1s;
+        width: 80%;
+    }
+
+    .saveButton:hover:not(:disabled) {
+        transform: scale(1.05);
+        background: linear-gradient(90deg, #10b981 40%, #34d399 100%);
+    }
+
+    .saveButton:disabled {
+        background: #9ca3af;
+        cursor: not-allowed;
+        transform: none;
+    }
+
+    /* スマホ用調整 */
+    @media (max-width: 480px) {
+        .nameInput, .saveButton {
+            width: 100%;
+            font-size: 1.1rem;
+        }
+        
+        .inputArea {
+            margin: 10px 0;
+        }
+    }
+
+
+
+
+    /* --- RankingPage 用 --- */
+
+    .rankingList {
+        margin: 20px 0;
+        text-align: left;
+        max-height: 400px;
+        overflow-y: auto; /* データが多い場合スクロール可能に */
+        padding: 10px;
+        background: rgba(255, 255, 255, 0.5);
+        border-radius: 10px;
+    }
+
+    .rankingItem {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 10px;
+        border-bottom: 2px dashed #1e40af;
+        font-family: "DotGothic16", "Arial";
+        font-size: 1.2rem;
+    }
+
+    .rankingItem:last-child {
+        border-bottom: none;
+    }
+
+    .rank {
+        font-weight: bold;
+        color: #dc2626; /* 順位は赤色 */
+        width: 50px;
+    }
+
+    .rankName {
+        flex: 1;
+        margin-left: 10px;
+        color: #333;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+
+    .rankScore {
+        font-weight: bold;
+        color: #1e40af;
+    }
+
+    /* スマホ用 */
+    @media (max-width: 480px) {
+        .rankingItem {
+            font-size: 1rem;
+            padding: 8px 4px;
+        }
+    }
+    .tabArea {
+        display: flex;
+        justify-content: center;
+        gap: 10px;
+        margin-bottom: 20px;
+    }
+
+    .tabButton {
+        padding: 8px 12px;
+        font-family: "DotGothic16", "Arial";
+        font-size: 0.9rem;
+        background: #e5e7eb;
+        border: 2px solid #9ca3af;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: all 0.2s;
+    }
+
+    .activeTab {
+        background: #1e40af;
+        color: white;
+        border-color: #1e40af;
+        transform: scale(1.1);
+    }
+
+    .tabButton:hover:not(.activeTab) {
+        background: #d1d5db;
+    }
+
+    .rankingItem {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 12px 10px;
+        border-bottom: 2px dashed #1e40af;
+    }
+
+    .rankInfo {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        flex: 1;
+    }
+
+    .scoreInfo {
+        display: flex;
+        flex-direction: column; /* スコアと日付を縦に並べる */
+        align-items: flex-end;
+        gap: 2px;
+    }
+
+    .rankDate {
+        font-size: 0.7rem;
+        color: #666;
+        font-family: "Arial"; /* 数字は見やすいフォントで */
+    }
+
+/* 中断ボタンの配置 */
+.quitButton {
+    position: absolute;
+    top: 15px;     /* SCORE(-5px) のさらに上に配置 */
+    right: 20px;    /* SCOREの右端に揃える */
+    background: #475569; /* ダークグレーで引き締める */
     color: #fff;
-    border: none;
-    border-radius: 12px;
-    padding: 16px 32px;
-    font-size: 1.3rem;
-    font-family: "DotGothic16","Arial";
-    font-weight: bold;
-    margin: 15px 0;
-    cursor: pointer;
-    box-shadow: 0 6px 18px rgba(15,23,42,0.06);
-    transition: transform 0.1s;
-    width: 90%;
-    position: relative;
-    z-index: 2;
-}
-
-.resultButton:hover {
-    transform: scale(1.06);
-    background: linear-gradient(90deg, #3b82f6 40%, #60a5fa 100%);
-}
-
-/* --- SetDatabaseComponent 用 --- */
-
-.inputArea {
-    margin: 20px 0;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 15px;
-    z-index: 2;
-    position: relative;
-}
-
-.nameInput {
-    width: 80%;
-    padding: 12px;
-    font-size: 1.2rem;
-    font-family: "DotGothic16", "Arial";
-    border: 3px solid #1e40af;
+    border: 2px solid #fff; /* 枠線を付けて視認性を上げる */
+    padding: 4px 12px;
     border-radius: 8px;
-    background: #fff;
-    text-align: center;
-    outline: none;
-    transition: box-shadow 0.2s;
-}
-
-.nameInput:focus {
-    box-shadow: 0 0 10px rgba(37, 99, 235, 0.5);
-}
-
-.nameInput:disabled {
-    background: #e5e7eb;
-    border-color: #9ca3af;
-    color: #6b7280;
-}
-
-.saveButton {
-    /* .resultButton のスタイルをベースに調整 */
-    background: linear-gradient(90deg, #059669 40%, #10b981 100%);
-    color: #fff;
-    border: none;
-    border-radius: 12px;
-    padding: 12px 24px;
-    font-size: 1.2rem;
-    font-family: "DotGothic16", "Arial";
-    font-weight: bold;
     cursor: pointer;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    transition: transform 0.1s;
-    width: 80%;
+    font-size: 1rem;
+    font-family: "DotGothic16", "Arial";
+    z-index: 20;
+    transition: all 0.2s;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
 }
 
-.saveButton:hover:not(:disabled) {
-    transform: scale(1.05);
-    background: linear-gradient(90deg, #10b981 40%, #34d399 100%);
-}
-
-.saveButton:disabled {
-    background: #9ca3af;
-    cursor: not-allowed;
-    transform: none;
+.quitButton:hover {
+    background: #1e293b;
+    transform: translateY(-2px); /* 少し浮き上がる演出 */
 }
 
 /* スマホ用調整 */
 @media (max-width: 480px) {
-    .nameInput, .saveButton {
-        width: 100%;
-        font-size: 1.1rem;
-    }
-    
-    .inputArea {
-        margin: 10px 0;
+    .quitButton {
+        top: -35px;    /* スマホでは少し位置を詰める */
+        right: 15px;
+        font-size: 0.7rem;
+        padding: 2px 8px;
     }
 }
 
-
-
-
-/* --- RankingPage 用 --- */
-
-.rankingList {
-    margin: 20px 0;
-    text-align: left;
-    max-height: 400px;
-    overflow-y: auto; /* データが多い場合スクロール可能に */
-    padding: 10px;
-    background: rgba(255, 255, 255, 0.5);
-    border-radius: 10px;
-}
-
-.rankingItem {
+/* メニュー全体のレイアウト */
+.menuArea {
     display: flex;
-    justify-content: space-between;
+    flex-direction: column;
     align-items: center;
-    padding: 10px;
-    border-bottom: 2px dashed #1e40af;
-    font-family: "DotGothic16", "Arial";
+    gap: 20px;         /* ボタン同士の間隔 */
+    padding: 20px 0;
+    width: 100%;
+}
+
+/* メニュー用ボタンの共通スタイル */
+.menuButton {
+    width: 80%;        /* パネルに対しての幅 */
+    max-width: 250px;
+    padding: 16px;
+    border: none;
+    border-radius: 12px;
     font-size: 1.2rem;
-}
-
-.rankingItem:last-child {
-    border-bottom: none;
-}
-
-.rank {
+    font-family: "DotGothic16", "Arial";
     font-weight: bold;
-    color: #dc2626; /* 順位は赤色 */
-    width: 50px;
+    color: #fff;
+    cursor: pointer;
+    transition: transform 0.1s, filter 0.2s;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
-.rankName {
-    flex: 1;
-    margin-left: 10px;
-    color: #333;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
+.menuButton:hover {
+    transform: scale(1.05);
+    filter: brightness(1.1); /* 少し明るくする */
 }
 
-.rankScore {
-    font-weight: bold;
-    color: #1e40af;
-}
+/* 色のバリエーション */
+.bgBlue { background: linear-gradient(90deg, #1e40af 40%, #2563eb 100%); }
+.bgRed  { background: linear-gradient(90deg, #dc2626 40%, #ef4444 100%); }
 
 /* スマホ用 */
 @media (max-width: 480px) {
-    .rankingItem {
+    .menuButton {
+        width: 90%;
         font-size: 1rem;
-        padding: 8px 4px;
+        padding: 12px;
     }
-}
-.tabArea {
-    display: flex;
-    justify-content: center;
-    gap: 10px;
-    margin-bottom: 20px;
-}
-
-.tabButton {
-    padding: 8px 12px;
-    font-family: "DotGothic16", "Arial";
-    font-size: 0.9rem;
-    background: #e5e7eb;
-    border: 2px solid #9ca3af;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: all 0.2s;
-}
-
-.activeTab {
-    background: #1e40af;
-    color: white;
-    border-color: #1e40af;
-    transform: scale(1.1);
-}
-
-.tabButton:hover:not(.activeTab) {
-    background: #d1d5db;
-}
-
-.rankingItem {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 12px 10px;
-    border-bottom: 2px dashed #1e40af;
-}
-
-.rankInfo {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    flex: 1;
-}
-
-.scoreInfo {
-    display: flex;
-    flex-direction: column; /* スコアと日付を縦に並べる */
-    align-items: flex-end;
-    gap: 2px;
-}
-
-.rankDate {
-    font-size: 0.7rem;
-    color: #666;
-    font-family: "Arial"; /* 数字は見やすいフォントで */
 }

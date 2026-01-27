@@ -1,9 +1,13 @@
+//ベースはgeminiで生成
+//一部人力
+
 import { useState, useEffect } from "react";
 import { db } from "./scripts/firebase.ts";
 import { collection, query, orderBy, limit, getDocs, where, Timestamp } from "firebase/firestore"; // whereを追加
 import classes from "./css/PrimeGame.module.css";
 import { useNavigate } from "react-router-dom";
 
+//データベースのラベル
 type RankingData = {
     userName: string;
     userScore: number;
@@ -12,6 +16,7 @@ type RankingData = {
 };
 
 export default function RankingPage() {
+    //ランキングデータ
     const [rankings, setRankings] = useState<RankingData[]>([]);
     const [isLoading, setIsLoading] = useState(true);
     // 現在表示している難易度を管理（初期値はnormal）
@@ -20,15 +25,19 @@ export default function RankingPage() {
 
     useEffect(() => {
         const fetchRankings = async () => {
-            setIsLoading(true); // 切り替え時もロード表示にする
+            setIsLoading(true); //切り替え時もロード表示にする
             try {
+                //データベースから取り出す条件
                 const q = query(
                     collection(db, "RANKINGs"),
-                    where("userDifficulty", "==", viewDifficulty), // 難易度で絞り込み
-                    orderBy("userScore", "desc"),
-                    limit(10)
+                    where("userDifficulty", "==", viewDifficulty), //難易度で絞り込み
+                    orderBy("userScore", "desc"), //スコア降順
+                    limit(10) //上から10個
                 );
+                //取得
                 const querySnapshot = await getDocs(q);
+                //データベースからドキュメントリスト(docs)形式で取り出す⇒data()で配列形式に
+                //as RankingDataで，メンバ名とDBのフィールド名が一致するものを自動的に代入
                 const data = querySnapshot.docs.map(doc => doc.data() as RankingData);
                 setRankings(data);
             } catch (error) {
@@ -47,13 +56,13 @@ export default function RankingPage() {
 
                 {/* --- 難易度切り替えタブ --- */}
                 <div className={classes.tabArea}>
-                    {["easy", "normal", "hard"].map((level) => (
+                    {["easy", "normal", "hard"].map((difficulty) => (
                         <button
-                            key={level}
-                            onClick={() => setViewDifficulty(level)}
-                            className={`${classes.tabButton} ${viewDifficulty === level ? classes.activeTab : ""}`}
+                            key={difficulty}
+                            onClick={() => setViewDifficulty(difficulty)}
+                            className={`${classes.tabButton} ${viewDifficulty === difficulty ? classes.activeTab : ""}`}
                         >
-                            {level.toUpperCase()}
+                            {difficulty.toUpperCase()}
                         </button>
                     ))}
                 </div>
